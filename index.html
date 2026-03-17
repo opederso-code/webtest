@@ -106,8 +106,200 @@
     .project-page {
       z-index: 4; opacity: 0; pointer-events: none;
       background: #fff;
+      overflow-y: auto;
     }
     .project-page.visible { opacity: 1; pointer-events: all; }
+
+    /* ── Horizontal scroll (rauno-style) ────────────────── */
+    #page-oakley {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .oakley-hscroll {
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .oakley-hscroll::-webkit-scrollbar { display: none; }
+    .oakley-section {
+      flex-shrink: 0;
+      width: 100vw;
+      height: 100%;
+      scroll-snap-align: start;
+      overflow-y: auto;
+      scrollbar-width: none;
+      position: relative;
+    }
+    .oakley-section::-webkit-scrollbar { display: none; }
+
+    /* Progress bar */
+    .oakley-progress-bar {
+      flex-shrink: 0;
+      height: 2px;
+      background: #e8e8e8;
+      position: relative;
+    }
+    .oakley-progress-fill {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      width: 0%;
+      background: #000;
+      transition: width 0.08s linear;
+    }
+
+    /* Section dots */
+    .oakley-dots {
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .oakley-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #ccc;
+      transition: background 0.3s ease;
+    }
+    .oakley-dot.active { background: #000; }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      color: #999;
+      letter-spacing: 0.04em;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+    .scroll-hint.hidden { opacity: 0; pointer-events: none; }
+    .scroll-hint-arrow.rev span { transform: rotate(-135deg); }
+    .scroll-hint-arrow {
+      display: flex;
+      gap: 3px;
+    }
+    .scroll-hint-arrow span {
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-right: 1.5px solid #bbb;
+      border-top: 1.5px solid #bbb;
+      transform: rotate(45deg);
+      animation: hintPulse 1.4s ease-in-out infinite;
+    }
+    .scroll-hint-arrow span:nth-child(2) { animation-delay: 0.18s; }
+    .scroll-hint-arrow span:nth-child(3) { animation-delay: 0.36s; }
+    @keyframes hintPulse {
+      0%, 100% { opacity: 0.2; }
+      50%       { opacity: 1;   }
+    }
+
+    /* ── Oakley project page ─────────────────────────── */
+    .oakley-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 48px 100px;
+    }
+    .oakley-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .oakley-text h2 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 500;
+      font-size: 32px;
+      color: #000;
+      margin-bottom: 28px;
+    }
+    .oakley-text p {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 18px;
+      color: #000;
+      line-height: 1.55;
+    }
+    .oakley-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+    .oakley-grid img {
+      width: 100%;
+      height: 22vw;
+      max-height: 280px;
+      object-fit: cover;
+      border-radius: 3px;
+      display: block;
+    }
+    .sketch-scene {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .sketch-label {
+      position: absolute;
+      left: 17%;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+    }
+    .sketch-label h2 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 500;
+      font-size: 32px;
+      color: #000;
+      line-height: 1.15;
+    }
+    .sketch-wrap {
+      position: absolute;
+      overflow: hidden;
+      border-radius: 3px;
+      z-index: 1;
+      transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  opacity 0.4s ease;
+    }
+    #swA { left: 34%; top: 7%;  width: 42%; height: 41%; }
+    #swB { left: 26%; top: 54%; width: 31%; height: 36%; }
+    #swC { left: 62%; top: 52%; width: 31%; height: 36%; }
+    .sketch-wrap:hover { transform: scale(1.55); z-index: 10; }
+    .sketch-scene:has(.sketch-wrap:hover) .sketch-wrap:not(:hover) { opacity: 0.35; }
+    .sketch-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+      opacity: 0;
+      transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .sketch-wrap:hover img { transform: scale(1.05); }
+
+    .oakley-text { opacity: 0; }
+    .oakley-text p {
+      opacity: 0;
+      filter: blur(10px);
+      transition: opacity 2.4s ease, filter 2.4s ease;
+    }
+    .oakley-text p.dissolved { opacity: 1; filter: blur(0); }
+    .oakley-grid img { opacity: 0; }
 
     .curtain {
       position: fixed; inset: 0;
@@ -525,7 +717,7 @@
         <span class="hover-hint">Click to scroll through</span>
         <div class="meta-row">
           <p id="btn-tng">Teenage Engineering Concept</p>
-          <p>Design Replication</p>
+          <p>Desing Language Replication</p>
           <p>03.2</p>
           <p>2026</p>
         </div>
@@ -560,7 +752,70 @@
   <div class="curtain" id="curtain"></div>
 
   <div class="page project-page" id="page-oakley">
-    <span class="back-btn project-back">← Back</span>
+    <div class="oakley-hscroll" id="oakleyHScroll">
+
+      <!-- Section 1: Process content -->
+      <div class="oakley-section">
+        <span class="back-btn project-back">← Back</span>
+        <div class="oakley-inner">
+          <div class="oakley-layout">
+            <div class="oakley-text">
+              <h2>Process</h2>
+              <p>Inspired by the organic, alien-like forms, complex geometries, and unmistakable silhouettes that defined Oakley's designs in the late 1990s and early 2000s, I set out to challenge myself by working within such a bold and iconic design language. This project explores a speculative scenario: what if Oakley expanded into the world of motorsport, translating the brand's distinctive eyewear aesthetics and performance-driven ethos into racing equipment and design.</p>
+            </div>
+            <div class="oakley-grid">
+              <img src="ref-platinum.png"      alt="Oakley platinum eyewear" />
+              <img src="ref-radarlock.png"     alt="Oakley Radarlock ad" />
+              <img src="ref-gorpcore.png"      alt="Oakley gorpcore eyewear" style="object-position: center top;" />
+              <img src="ref-plantaris.png"     alt="Oakley Plantaris ad" />
+              <img src="ref-sprinter.png"      alt="Sprinter wearing Oakley" />
+              <img src="ref-minardi.png"       alt="Minardi Lamborghini helmet" />
+              <img src="ref-puma.png"          alt="Puma racing helmet" />
+              <img src="ref-helmet-sketch.png" alt="Helmet concept sketch" />
+              <img src="ref-sketch.jpg"        alt="Oakley M Frame sketch" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Silhouette Sketches -->
+      <div class="oakley-section" id="sketchSection">
+        <div class="sketch-scene">
+          <div class="sketch-label" id="sketchLabel">
+            <h2>Silhouette<br>Sketches</h2>
+          </div>
+          <div class="sketch-wrap" id="swA"><img src="sketch-a.jpg" alt="Side profile sketch A" /></div>
+          <div class="sketch-wrap" id="swB"><img src="sketch-b.jpg" alt="Side profile sketch B" /></div>
+          <div class="sketch-wrap" id="swC"><img src="sketch-c.jpg" alt="Side profile sketch C" /></div>
+        </div>
+      </div>
+
+      <!-- Section 3: Blank -->
+      <div class="oakley-section" id="section3"></div>
+
+    </div>
+
+    <!-- Progress bar -->
+    <div class="oakley-progress-bar" style="position:relative;">
+      <div class="oakley-progress-fill" id="oakleyFill"></div>
+      <div class="scroll-hint" id="scrollHint">
+        Two finger scroll right
+        <div class="scroll-hint-arrow">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="scroll-hint hidden" id="scrollHintLeft">
+        <div class="scroll-hint-arrow rev">
+          <span></span><span></span><span></span>
+        </div>
+        Two finger scroll left
+      </div>
+      <div class="oakley-dots">
+        <div class="oakley-dot active" data-index="0"></div>
+        <div class="oakley-dot" data-index="1"></div>
+        <div class="oakley-dot" data-index="2"></div>
+      </div>
+    </div>
   </div>
 
   <div class="page project-page" id="page-torrent">
@@ -835,6 +1090,198 @@
 
     smoothScroll(document.querySelector('.col-left'), 0.14);
     smoothScroll(document.querySelector('.col-right'), 0.14);
+
+    // ── Oakley page entrance animation ───────────────────────────
+    (function () {
+      const page    = document.getElementById('page-oakley');
+      const textEl  = page.querySelector('.oakley-section .oakley-text');
+      const gridEl  = page.querySelector('.oakley-section .oakley-grid');
+
+      function reset() {
+        textEl.style.transition = 'none';
+        textEl.style.opacity    = '0';
+        textEl.querySelector('p').classList.remove('dissolved');
+        Array.from(gridEl.querySelectorAll('img')).forEach(img => {
+          img.style.transition = 'none';
+          img.style.opacity    = '0';
+          img.style.transform  = '';
+          img.style.zIndex     = '';
+        });
+      }
+
+      function run() {
+        const imgs = Array.from(gridEl.querySelectorAll('img'));
+        // Store each image's offset from grid centre so we don't use string replace
+        const offsets = [];
+
+        // Double rAF ensures the page has fully painted before measuring
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          const gr = gridEl.getBoundingClientRect();
+          const cx = gr.left + gr.width  / 2;
+          const cy = gr.top  + gr.height / 2;
+
+          imgs.forEach((img, i) => {
+            const r  = img.getBoundingClientRect();
+            const dx = cx - (r.left + r.width  / 2);
+            const dy = cy - (r.top  + r.height / 2);
+            offsets.push({ dx, dy });
+            img.style.transition = 'none';
+            img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.85)`;
+            img.style.opacity    = '0';
+            img.style.zIndex     = String(imgs.length - i);
+          });
+
+          // Snap text in, then dissolve paragraph
+          setTimeout(() => {
+            textEl.style.transition = 'none';
+            textEl.style.opacity    = '1';
+            setTimeout(() => textEl.querySelector('p').classList.add('dissolved'), 150);
+          }, 500);
+
+          // Show stacked images (fade + scale up to 1)
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              const { dx, dy } = offsets[i];
+              img.style.transition = `opacity 0.35s ease ${i * 0.04}s, transform 0.35s ease ${i * 0.04}s`;
+              img.style.opacity    = '1';
+              img.style.transform  = `translate(${dx}px, ${dy}px) scale(1)`;
+            });
+          }, 1500);
+
+          // Spread to grid positions
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              img.style.transition = `transform 1.4s cubic-bezier(0.34, 1.1, 0.64, 1) ${i * 0.12}s`;
+              img.style.transform  = 'translate(0px, 0px) scale(1)';
+            });
+            setTimeout(() => imgs.forEach(img => { img.style.zIndex = ''; }), 2200);
+          }, 2100);
+        }));
+      }
+
+      const observer = new MutationObserver(() => {
+        if (page.classList.contains('visible')) {
+          reset();
+          setTimeout(run, 700); // wait for curtain to lift
+          // Reset scroll position and hint
+          document.getElementById('oakleyHScroll').scrollLeft = 0;
+          document.getElementById('scrollHint').classList.remove('hidden');
+          document.getElementById('scrollHintLeft').classList.add('hidden');
+        } else {
+          reset();
+        }
+      });
+      observer.observe(page, { attributes: true, attributeFilter: ['class'] });
+      reset();
+    })();
+
+    // ── Sketch section animation (section 2) ─────────────────────
+    (function () {
+      const section  = document.getElementById('sketchSection');
+      const labelEl  = document.getElementById('sketchLabel');
+      const wraps    = Array.from(section.querySelectorAll('.sketch-wrap'));
+      let   animated = false;
+
+      function resetSketch() {
+        animated = false;
+        labelEl.style.transition = 'none';
+        labelEl.style.opacity    = '0';
+        wraps.forEach(wrap => {
+          const img = wrap.querySelector('img');
+          img.style.transition = 'none';
+          img.style.opacity    = '0';
+          img.style.transform  = '';
+          img.style.zIndex     = '';
+        });
+      }
+
+      function runSketch() {
+        if (animated) return;
+        animated = true;
+        const imgs    = wraps.map(w => w.querySelector('img'));
+        const offsets = [];
+
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          const sr = section.getBoundingClientRect();
+          // Stack point: center of the right 2/3 of the page
+          const cx = sr.left + sr.width  * 0.62;
+          const cy = sr.top  + sr.height * 0.50;
+
+          imgs.forEach((img, i) => {
+            const r  = img.getBoundingClientRect();
+            const dx = cx - (r.left + r.width  / 2);
+            const dy = cy - (r.top  + r.height / 2);
+            offsets.push({ dx, dy });
+            img.style.transition = 'none';
+            img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.85)`;
+            img.style.opacity    = '0';
+            img.style.zIndex     = String(imgs.length - i);
+          });
+
+          // Label snaps in
+          setTimeout(() => {
+            labelEl.style.transition = 'none';
+            labelEl.style.opacity    = '1';
+          }, 400);
+
+          // Images appear stacked
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              const { dx, dy } = offsets[i];
+              img.style.transition = `opacity 0.35s ease ${i * 0.04}s, transform 0.35s ease ${i * 0.04}s`;
+              img.style.opacity    = '1';
+              img.style.transform  = `translate(${dx}px, ${dy}px) scale(1)`;
+            });
+          }, 1000);
+
+          // Spread to final positions
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              img.style.transition = `transform 1.4s cubic-bezier(0.34, 1.1, 0.64, 1) ${i * 0.14}s`;
+              img.style.transform  = 'translate(0px, 0px) scale(1)';
+            });
+            setTimeout(() => imgs.forEach(img => { img.style.zIndex = ''; }), 2200);
+          }, 1600);
+        }));
+      }
+
+      // Watch horizontal scroll to detect when section 2 is in view
+      document.getElementById('oakleyHScroll').addEventListener('scroll', function () {
+        const threshold = this.clientWidth * 0.5;
+        if (this.scrollLeft >= threshold) {
+          runSketch();
+        }
+      }, { passive: true });
+
+      // Reset when page closes
+      const oakleyPage = document.getElementById('page-oakley');
+      new MutationObserver(() => {
+        if (!oakleyPage.classList.contains('visible')) resetSketch();
+      }).observe(oakleyPage, { attributes: true, attributeFilter: ['class'] });
+    })();
+
+    // ── Oakley horizontal scroll progress bar ─────────────────────
+    (function () {
+      const scroller = document.getElementById('oakleyHScroll');
+      const fill     = document.getElementById('oakleyFill');
+      const dots     = Array.from(document.querySelectorAll('.oakley-dot'));
+      const hint     = document.getElementById('scrollHint');
+      const hintLeft = document.getElementById('scrollHintLeft');
+
+      scroller.addEventListener('scroll', () => {
+        const max      = scroller.scrollWidth - scroller.clientWidth;
+        const progress = max > 0 ? scroller.scrollLeft / max : 0;
+        fill.style.width = (progress * 100) + '%';
+
+        // Right hint hides once user scrolls; left hint appears any time past section 1
+        if (scroller.scrollLeft > 10) hint.classList.add('hidden');
+        hintLeft.classList.toggle('hidden', scroller.scrollLeft < 10);
+
+        // Update active dot
+        const idx = Math.round(progress * (dots.length - 1));
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }, { passive: true });
+    })();
 
     // ── Crazy Lines canvas ────────────────────────────────────────
     (function() {
