@@ -3,9 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oliver</title>
-  <link rel="preconnect" href="https://api.fontshare.com" />
+  <title>Oliver Pederson — Product Design Portfolio</title>
+  <meta name="description" content="Oliver Pederson's product design portfolio — featuring work in industrial design, branding, and user experience." />
+  <meta property="og:title" content="Oliver Pederson — Product Design Portfolio" />
+  <meta property="og:description" content="Industrial design and UX projects by Oliver Pederson." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+  <link rel="preload" as="image" href="oakley.webp" />
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Bungee+Hairline&family=Fahkwang&family=IBM+Plex+Sans+Devanagari:wght@700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { width: 100%; height: 100%; overflow: hidden; -webkit-font-smoothing: antialiased; }
@@ -209,6 +218,189 @@
       50%       { opacity: 1;   }
     }
 
+    /* ── Ferro branding grid (section 2) ────────────── */
+    .ferro-brand-label {
+      position: absolute; top: 60px; left: 48px; z-index: 10;
+      opacity: 0; transition: opacity 0.4s ease 0.2s;
+    }
+    .ferro-brand-label h2 {
+      font-family: 'Satoshi', sans-serif; font-weight: 500;
+      font-size: 32px; color: #141414;
+    }
+    #ferroWordmarkText h2 {
+      opacity: 0; filter: blur(10px);
+      transition: opacity 0.9s ease, filter 0.9s ease;
+    }
+    #ferroWordmarkText h2.dissolved { opacity: 1; filter: blur(0); }
+    .ferro-sec-next {
+      position: absolute; top: 20px; right: 20px; z-index: 20;
+      font-family: 'Satoshi', sans-serif; font-weight: 500; font-size: 11px;
+      color: #000; cursor: pointer; letter-spacing: -0.06px;
+      transition: opacity 0.2s ease;
+    }
+    .ferro-sec-next:hover { opacity: 0.5; }
+    .ferro-brand-grid {
+      position: absolute; inset: 130px 48px 48px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.1fr;
+      grid-template-rows: 1.2fr 1fr;
+      gap: 4px;
+    }
+    .ferro-brand-grid > img {
+      width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0;
+    }
+    .fbg-pkg    { grid-column: 1; grid-row: 1; }
+    .fbg-abcd   { grid-column: 2; grid-row: 1; }
+    .fbg-poster { grid-column: 3; grid-row: 1 / span 2; }
+    .fbg-tubes  { grid-column: 1; grid-row: 2; }
+    .fbg-fonts  {
+      grid-column: 2; grid-row: 2;
+      display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 1fr);
+      background: #e8e8e8; overflow: hidden; opacity: 0;
+    }
+    .fbg-font-item {
+      display: flex; align-items: center; padding: 0 16px; overflow: hidden;
+      border-right: 1px solid rgba(0,0,0,0.08);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .fbg-font-item:nth-child(2n)      { border-right: none; }
+    .fbg-font-item:nth-last-child(-n+2) { border-bottom: none; }
+    .fbg-font-item span { font-size: 96px; line-height: 1; color: #141414; white-space: nowrap; }
+    .fbg-font-item img  { width: 65%; height: auto; display: block; }
+
+    /* ── Ferro sketch grid (section 3) ──────────────── */
+    .ferro-sketch-grid {
+      display: grid;
+      margin: 160px 200px 80px 200px;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 280px);
+      gap: 4px;
+    }
+    .ferro-sketch-grid img {
+      width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0;
+    }
+    .fsk-9  { grid-column: 1 / span 2; }
+    .fsk-10 { grid-column: 3 / span 2; }
+
+    /* ── Ferro renders (sections 6–8) ───────────────── */
+    .ferro-render-section { background: #000; }
+    .ferro-3up {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 48px 40px;
+    }
+    .ferro-3up img {
+      flex: 1; min-width: 0; height: 100%;
+      object-fit: contain; display: block; opacity: 0;
+    }
+    .ferro-single {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ferro-single img {
+      max-width: 72%; max-height: 85%;
+      object-fit: contain; display: block; opacity: 0;
+    }
+
+    /* ── Ferro wordmark (section 5) ─────────────────── */
+    .ferro-wordmark-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+    .ferro-wordmark-center img {
+      max-width: 45%;
+      max-height: 62%;
+      object-fit: contain;
+      display: block;
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ── Ferro color palette (section 4) ─────────────── */
+    .ferro-palette {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -44%);
+      width: 520px; height: 520px;
+    }
+    .fp-swatch {
+      position: absolute;
+      width: 160px; height: 160px;
+    }
+    .fp-circle {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: var(--clr);
+      border: 1px solid rgba(0,0,0,0.12);
+      transition: transform 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
+      cursor: default;
+    }
+    .fp-swatch:hover .fp-circle { transform: scale(1.3); }
+    .fp-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+    .fp-swatch:hover .fp-label { opacity: 1; }
+    .fp-label span {
+      display: block;
+      font-family: 'Satoshi', sans-serif;
+      font-size: 11px;
+      color: var(--txt, #141414);
+      line-height: 1.7;
+    }
+    .fp-label span:first-child { font-weight: 600; }
+
+    /* ── Ferro project page ──────────────────────────── */
+    #page-ferro { overflow: hidden; display: flex; flex-direction: column; }
+    .ferro-hscroll { display: flex; flex-direction: row; flex: 1; overflow-x: scroll; overflow-y: hidden;
+      scroll-snap-type: x mandatory; scrollbar-width: none; }
+    .ferro-hscroll::-webkit-scrollbar { display: none; }
+    .ferro-grid {
+      display: grid;
+      height: calc(100vh - 200px);
+      grid-template-columns: 2.5fr 1.2fr 1.2fr 1.2fr 2.5fr;
+      grid-template-rows: 1fr 1.1fr 0.8fr;
+      gap: 4px;
+    }
+    .ferro-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0;
+    }
+    .fg-building  { grid-column: 1;          grid-row: 1; }
+    .fg-tomford   { grid-column: 2;          grid-row: 1; }
+    .fg-foil      { grid-column: 3;          grid-row: 1; }
+    .fg-cube      { grid-column: 4;          grid-row: 1; }
+    .fg-chair     { grid-column: 5;          grid-row: 1 / span 2; }
+    .fg-bottle    { grid-column: 1;          grid-row: 2 / span 2; }
+    .fg-theatre   { grid-column: 2 / span 2; grid-row: 2; }
+    .fg-metal     { grid-column: 4;          grid-row: 2; }
+    .fg-package   { grid-column: 2 / span 2; grid-row: 3; }
+    .fg-tea       { grid-column: 4;          grid-row: 3; }
+    .fg-gradient  { grid-column: 5;          grid-row: 3; }
+
     /* ── Oakley project page ─────────────────────────── */
     .oakley-inner {
       max-width: 1100px;
@@ -249,6 +441,226 @@
       border-radius: 3px;
       display: block;
     }
+    /* ── Framing Questions section ───────────────────── */
+    .framing-inner {
+      padding: 52px 48px 52px;
+      height: 100%;
+      overflow-y: auto;
+      scrollbar-width: none;
+      display: flex;
+      flex-direction: column;
+    }
+    .framing-inner::-webkit-scrollbar { display: none; }
+    .framing-title {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 500;
+      font-size: 32px;
+      color: #000;
+      margin-bottom: 32px;
+      opacity: 0;
+      filter: blur(10px);
+      transition: opacity 0.9s ease, filter 0.9s ease;
+    }
+    .framing-title.revealed { opacity: 1; filter: blur(0); }
+    .framing-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      overflow: visible;
+    }
+    .framing-col-label {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #bbb;
+      padding: 0 16px 10px 0;
+      border-bottom: 1px solid #e0e0e0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .framing-col-label.revealed { opacity: 1; }
+    .framing-card {
+      padding: 16px 16px 16px 0;
+      border-bottom: 1px solid #ebebeb;
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #222;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  background 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+      position: relative;
+      z-index: 1;
+      cursor: default;
+    }
+    .framing-card.hmw {
+      font-weight: 400;
+      font-style: normal;
+    }
+    .framing-card.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .framing-card.revealed:hover {
+      transform: translateY(-3px) scale(1.03);
+      background: #f7f7f7;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+      border-radius: 6px;
+      z-index: 10;
+      padding-left: 10px;
+    }
+    /* ── TNG gallery panel section ───────────────────── */
+    .tng-gallery-scene {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      gap: 3px;
+      background: #000;
+    }
+    .tng-gallery-panel {
+      flex: 1;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(var(--slide, 30px));
+      transition: opacity 0.9s ease var(--delay, 0s), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s);
+    }
+    .tng-gallery-panel.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .tng-gallery-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .tng-gallery-panel:hover img { transform: scale(1.04); }
+    .tng-home-btn {
+      position: absolute;
+      top: 20px;
+      left: 24px;
+      z-index: 10;
+    }
+
+    .framing-summary { margin-top: 36px; }
+    .framing-opp-text {
+      margin-top: 12px;
+      opacity: 0;
+      filter: blur(10px);
+      transition: opacity 0.9s ease, filter 0.9s ease;
+    }
+    .framing-opp-text.dissolved { opacity: 1; filter: blur(0); }
+
+    .tng-sketch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+    .tng-sketch-grid img {
+      width: 100%;
+      height: 20vw;
+      max-height: 240px;
+      object-fit: cover;
+      border-radius: 3px;
+      display: block;
+      opacity: 0;
+    }
+
+    /* ── TNG project page ───────────────────────────── */
+    #page-tng { overflow: hidden; display: flex; flex-direction: column; }
+    .tng-hscroll { display: flex; flex-direction: row; flex: 1; overflow-x: scroll; overflow-y: hidden;
+      scroll-snap-type: x mandatory; scrollbar-width: none; }
+    .tng-hscroll::-webkit-scrollbar { display: none; }
+    .tng-grid-wrap { display: flex; flex-direction: column; }
+    .tng-caption {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      color: #999;
+      letter-spacing: 0.03em;
+      margin-top: 8px;
+      align-self: flex-start;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+    }
+    .tng-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+    .tng-grid img {
+      width: 100%;
+      height: 22vw;
+      max-height: 280px;
+      object-fit: cover;
+      border-radius: 3px;
+      display: block;
+      opacity: 0;
+    }
+
+    /* ── Section 3: CAD and Rendering ───────────────── */
+    .cad-scene {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .cad-label {
+      position: absolute;
+      left: 5%;
+      top: calc(50% - 39%);
+      opacity: 0;
+    }
+    .cad-label h2 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 500;
+      font-size: 32px;
+      color: #000;
+      line-height: 1.15;
+    }
+    .cad-grid {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 64%;
+      height: 78%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 8px;
+    }
+    .home-btn {
+      position: absolute;
+      top: 20px; left: 20px;
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 500; font-size: 11px;
+      color: #000; cursor: pointer;
+      letter-spacing: -0.06px;
+      transition: opacity 0.2s ease;
+    }
+    .home-btn:hover { opacity: 0.5; }
+    .cad-wrap {
+      overflow: hidden;
+      border-radius: 3px;
+    }
+    .cad-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0;
+      transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+    }
+    .cad-scene:has(.cad-wrap:hover) .cad-wrap:not(:hover) { opacity: 0.35; transition: opacity 0.4s ease; }
+    .cad-wrap { transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease; z-index: 1; }
+    .cad-wrap:hover { transform: scale(1.04); z-index: 10; }
+
     .sketch-scene {
       position: relative;
       width: 100%;
@@ -293,12 +705,12 @@
     .sketch-wrap:hover img { transform: scale(1.05); }
 
     .oakley-text { opacity: 0; }
-    .oakley-text p {
+    .oakley-text p, .oakley-text h2 {
       opacity: 0;
       filter: blur(10px);
       transition: opacity 2.4s ease, filter 2.4s ease;
     }
-    .oakley-text p.dissolved { opacity: 1; filter: blur(0); }
+    .oakley-text p.dissolved, .oakley-text h2.dissolved { opacity: 1; filter: blur(0); }
     .oakley-grid img { opacity: 0; }
 
     .curtain {
@@ -328,16 +740,13 @@
       font-size: 16px;
       color: #000;
       letter-spacing: 0.01em;
-    }
-    .contact-tagline .char {
-      display: inline-block;
       opacity: 0;
-      filter: blur(12px);
-      transform: translateY(18px);
-      transition: opacity 0.6s ease, filter 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(14px);
+      transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    .contact-tagline .char.space {
-      width: 0.3em;
+    .contact-tagline.revealed {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .contact-icons {
@@ -408,8 +817,19 @@
       color: #000; cursor: pointer;
       letter-spacing: -0.06px;
       transition: opacity 0.2s ease;
+      z-index: 20;
     }
     .back-btn:hover { opacity: 0.5; }
+    .next-btn {
+      position: absolute; top: 20px; right: 20px;
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 500; font-size: 11px;
+      color: #000; cursor: pointer;
+      letter-spacing: -0.06px;
+      transition: opacity 0.2s ease;
+      z-index: 20;
+    }
+    .next-btn:hover { opacity: 0.5; }
 
     .philosophy-text {
       max-width: 900px;
@@ -547,7 +967,6 @@
       position: absolute; inset: 0;
       transform: translateX(100%);
       transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      cursor: pointer;
       visibility: hidden;
     }
     .gallery-card img.active  { transform: translateX(0);     visibility: visible; }
@@ -574,12 +993,9 @@
     .meta-row p:first-child {
       cursor: pointer;
       pointer-events: all;
-      padding: 3px 7px;
-      border-radius: 3px;
-      background: rgba(0,0,0,0);
-      transition: background 0.3s ease;
+      transition: opacity 0.2s ease;
     }
-    .meta-row p:first-child:hover { background: rgba(0,0,0,0.12); }
+    .meta-row p:first-child:hover { opacity: 0.5; }
 
     /* ── Right col nav — each item anchored to a fixed edge ── */
     .studio-badge {
@@ -666,9 +1082,9 @@
         <div class="media-strip">
           <video src="clip1.mov" autoplay loop muted playsinline></video>
           <video src="clip2.mov" autoplay loop muted playsinline></video>
-          <img src="moto.jpg" alt="Motorcycle" />
+          <img src="moto.webp" alt="Motorcycle"  decoding="async" />
           <video src="clip3.mov" autoplay loop muted playsinline></video>
-          <img src="mop.jpg" alt="Mop bucket" />
+          <img src="mop.webp" alt="Mop bucket" loading="lazy"  decoding="async" />
         </div>
       </div>
 
@@ -679,15 +1095,15 @@
 
       <div class="left-card">
         <div class="gallery-card" id="galleryCard">
-          <img src="oakley.png"  class="active" alt="Oakley render 1" />
-          <img src="oakley2.jpg" alt="Oakley render 2" />
-          <img src="oakley3.jpg" alt="Oakley render 3" />
-          <img src="oakley4.jpg" alt="Oakley render 4" />
-          <img src="oakley5.jpg" alt="Oakley render 5" />
+          <img src="oakley.webp"  class="active" alt="Oakley render 1"  decoding="async" />
+          <img src="oakley2.webp" alt="Oakley render 2" loading="lazy"  decoding="async" />
+          <img src="oakley3.webp" alt="Oakley render 3" loading="lazy"  decoding="async" />
+          <img src="oakley4.webp" alt="Oakley render 4" loading="lazy"  decoding="async" />
+          <img src="oakley5.webp" alt="Oakley render 5" loading="lazy"  decoding="async" />
         </div>
         <span class="hover-hint">Click to scroll through</span>
         <div class="meta-row">
-          <p id="btn-oakley">Oakley X Racing Concept</p>
+          <p id="btn-oakley" role="button" tabindex="0" aria-label="View Oakley X Racing Concept project" style="text-decoration:underline;text-underline-offset:3px;">Oakley X Racing Concept</p>
           <p>Form Experimentation</p>
           <p>02.15</p>
           <p>2026</p>
@@ -696,11 +1112,11 @@
 
       <div class="left-card">
         <div class="gallery-card" id="sphereCard">
-          <img src="sphere.jpg" class="active" alt="Sphere render 1" />
+          <img src="sphere.webp" class="active" alt="Sphere render 1" loading="lazy"  decoding="async" />
         </div>
         <span class="hover-hint">Click to scroll through</span>
         <div class="meta-row">
-          <p id="btn-torrent">Torrent</p>
+          <p id="btn-torrent" role="button" tabindex="0" aria-label="View Torrent project" style="text-decoration:underline;text-underline-offset:3px;">Torrent</p>
           <p>Defense Tech Concept</p>
           <p>11.15</p>
           <p>2025</p>
@@ -709,14 +1125,14 @@
 
       <div class="left-card">
         <div class="gallery-card" id="tngCard">
-          <img src="tng.jpg"  class="active" alt="TNG render 1" />
-          <img src="tng2.jpg" alt="TNG render 2" />
-          <img src="tng3.jpg" alt="TNG render 3" />
-          <img src="tng4.jpg" alt="TNG render 4" />
+          <img src="tng.webp"  class="active" alt="TNG render 1" loading="lazy"  decoding="async" />
+          <img src="tng2.webp" alt="TNG render 2" loading="lazy"  decoding="async" />
+          <img src="tng3.webp" alt="TNG render 3" loading="lazy"  decoding="async" />
+          <img src="tng4.webp" alt="TNG render 4" loading="lazy"  decoding="async" />
         </div>
         <span class="hover-hint">Click to scroll through</span>
         <div class="meta-row">
-          <p id="btn-tng">Teenage Engineering Concept</p>
+          <p id="btn-tng" role="button" tabindex="0" aria-label="View Teenage Engineering Concept project" style="text-decoration:underline;text-underline-offset:3px;">Teenage Engineering Concept</p>
           <p>Desing Language Replication</p>
           <p>03.2</p>
           <p>2026</p>
@@ -725,16 +1141,16 @@
 
       <div class="left-card">
         <div class="gallery-card" id="ferroCard">
-          <img src="ferro.jpg" class="active" alt="Ferro render 1" style="object-position: center 8%;" />
-          <img src="ferro2.jpg" alt="Ferro render 2" />
-          <img src="ferro3.jpg" alt="Ferro render 3" />
-          <img src="ferro4.jpg" alt="Ferro render 4" />
-          <img src="ferro5.jpg" alt="Ferro render 5" />
-          <img src="ferro6.jpg" alt="Ferro render 6" />
-          <span class="hover-hint">Click to scroll through</span>
+          <img src="ferro.webp" class="active" alt="Ferro render 1" style="object-position: center 8%;" loading="lazy"  decoding="async" />
+          <img src="ferro2.webp" alt="Ferro render 2" style="object-position: center top;" loading="lazy"  decoding="async" />
+          <img src="ferro3.webp" alt="Ferro render 3" style="object-position: center top;" loading="lazy"  decoding="async" />
+          <img src="ferro4.webp" alt="Ferro render 4" style="object-position: center top;" loading="lazy"  decoding="async" />
+          <img src="ferro5.webp" alt="Ferro render 5" style="object-position: center top;" loading="lazy"  decoding="async" />
+          <img src="ferro6.webp" alt="Ferro render 6" style="object-position: center top;" loading="lazy"  decoding="async" />
         </div>
+        <span class="hover-hint">Click to scroll through</span>
         <div class="meta-row">
-          <p id="btn-ferro">Ferros Potion Concept</p>
+          <p id="btn-ferro" role="button" tabindex="0" aria-label="View Ferros Potion Concept project" style="text-decoration:underline;text-underline-offset:3px;">Ferros Potion Concept</p>
           <p>Brutalist Design</p>
           <p>11.10</p>
           <p>2025</p>
@@ -742,7 +1158,7 @@
       </div>
 
       <div class="left-card lines-card">
-        <canvas id="crazyLines"></canvas>
+        <canvas id="crazyLines" aria-hidden="true"></canvas>
       </div>
 
     </div>
@@ -752,11 +1168,12 @@
   <div class="curtain" id="curtain"></div>
 
   <div class="page project-page" id="page-oakley">
+    <span class="next-btn" id="oakleyNext" role="button" tabindex="0" aria-label="Next section">Next →</span>
     <div class="oakley-hscroll" id="oakleyHScroll">
 
       <!-- Section 1: Process content -->
       <div class="oakley-section">
-        <span class="back-btn project-back">← Back</span>
+        <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
         <div class="oakley-inner">
           <div class="oakley-layout">
             <div class="oakley-text">
@@ -764,15 +1181,15 @@
               <p>Inspired by the organic, alien-like forms, complex geometries, and unmistakable silhouettes that defined Oakley's designs in the late 1990s and early 2000s, I set out to challenge myself by working within such a bold and iconic design language. This project explores a speculative scenario: what if Oakley expanded into the world of motorsport, translating the brand's distinctive eyewear aesthetics and performance-driven ethos into racing equipment and design.</p>
             </div>
             <div class="oakley-grid">
-              <img src="ref-platinum.png"      alt="Oakley platinum eyewear" />
-              <img src="ref-radarlock.png"     alt="Oakley Radarlock ad" />
-              <img src="ref-gorpcore.png"      alt="Oakley gorpcore eyewear" style="object-position: center top;" />
-              <img src="ref-plantaris.png"     alt="Oakley Plantaris ad" />
-              <img src="ref-sprinter.png"      alt="Sprinter wearing Oakley" />
-              <img src="ref-minardi.png"       alt="Minardi Lamborghini helmet" />
-              <img src="ref-puma.png"          alt="Puma racing helmet" />
-              <img src="ref-helmet-sketch.png" alt="Helmet concept sketch" />
-              <img src="ref-sketch.jpg"        alt="Oakley M Frame sketch" />
+              <img src="ref-platinum.webp"      alt="Oakley platinum eyewear" loading="lazy"  decoding="async" />
+              <img src="ref-radarlock.webp"     alt="Oakley Radarlock ad" loading="lazy"  decoding="async" />
+              <img src="ref-gorpcore.webp"      alt="Oakley gorpcore eyewear" style="object-position: center top;" loading="lazy"  decoding="async" />
+              <img src="ref-plantaris.webp"     alt="Oakley Plantaris ad" loading="lazy"  decoding="async" />
+              <img src="ref-sprinter.webp"      alt="Sprinter wearing Oakley" loading="lazy"  decoding="async" />
+              <img src="ref-minardi.webp"       alt="Minardi Lamborghini helmet" loading="lazy"  decoding="async" />
+              <img src="ref-puma.webp"          alt="Puma racing helmet" loading="lazy"  decoding="async" />
+              <img src="ref-helmet-sketch.webp" alt="Helmet concept sketch" loading="lazy"  decoding="async" />
+              <img src="ref-sketch.webp"        alt="Oakley M Frame sketch" loading="lazy"  decoding="async" />
             </div>
           </div>
         </div>
@@ -784,14 +1201,27 @@
           <div class="sketch-label" id="sketchLabel">
             <h2>Silhouette<br>Sketches</h2>
           </div>
-          <div class="sketch-wrap" id="swA"><img src="sketch-a.jpg" alt="Side profile sketch A" /></div>
-          <div class="sketch-wrap" id="swB"><img src="sketch-b.jpg" alt="Side profile sketch B" /></div>
-          <div class="sketch-wrap" id="swC"><img src="sketch-c.jpg" alt="Side profile sketch C" /></div>
+          <div class="sketch-wrap" id="swA"><img src="sketch-a-new.webp" alt="Silhouette sketch 1" loading="lazy"  decoding="async" /></div>
+          <div class="sketch-wrap" id="swB"><img src="sketch-b-new.webp" alt="Silhouette sketch 2" loading="lazy"  decoding="async" /></div>
+          <div class="sketch-wrap" id="swC"><img src="sketch-c-new.webp" alt="Silhouette sketch 3" loading="lazy"  decoding="async" /></div>
         </div>
       </div>
 
-      <!-- Section 3: Blank -->
-      <div class="oakley-section" id="section3"></div>
+      <!-- Section 3: CAD and Rendering -->
+      <div class="oakley-section" id="section3">
+        <div class="cad-scene">
+          <span class="home-btn" id="cadHomeBtn" role="button" tabindex="0" aria-label="Go to home">Home</span>
+          <div class="cad-label" id="cadLabel">
+            <h2>CAD &amp;<br>Rendering</h2>
+          </div>
+          <div class="cad-grid" id="cadGrid">
+            <div class="cad-wrap"><img src="cad1.webp" alt="CAD render 1" loading="lazy"  decoding="async" /></div>
+            <div class="cad-wrap"><img src="cad2.webp" alt="CAD render 2" loading="lazy"  decoding="async" /></div>
+            <div class="cad-wrap"><img src="cad3.webp" alt="CAD render 3" loading="lazy"  decoding="async" /></div>
+            <div class="cad-wrap"><img src="cad4.webp" alt="CAD render 4" loading="lazy"  decoding="async" /></div>
+          </div>
+        </div>
+      </div>
 
     </div>
 
@@ -819,28 +1249,352 @@
   </div>
 
   <div class="page project-page" id="page-torrent">
-    <span class="back-btn project-back">← Back</span>
+    <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
   </div>
 
   <div class="page project-page" id="page-tng">
-    <span class="back-btn project-back">← Back</span>
+    <span class="next-btn" id="tngNext" role="button" tabindex="0" aria-label="Next section">Next →</span>
+    <div class="tng-hscroll" id="tngHScroll">
+      <div class="oakley-section">
+        <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
+        <div class="oakley-inner">
+          <div class="oakley-layout">
+            <div class="oakley-text" id="tngTextEl">
+              <h2>Process</h2>
+              <p>Assigned the task of reimagining the universal remote, this project invited the selection of a primary brand to reinterpret in dialogue with a secondary counterpart. I chose <a href="https://teenage.engineering/products" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px;color:inherit;">Teenage Engineering</a> for its playful minimalism and meticulous attention to form, and paired it with <a href="https://www.sonos.com/en-us/shop" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px;color:inherit;">Sonos</a>—a brand defined by its refined functionality and seamless integration within the home electronics ecosystem.</p>
+            </div>
+            <div class="tng-grid-wrap">
+              <div class="tng-grid" id="tngGrid">
+                <img src="tng-ref1.webp" alt="TNG reference 1" loading="lazy"  decoding="async" />
+                <img src="tng-ref2.webp" alt="TNG reference 2" loading="lazy"  decoding="async" />
+                <img src="tng-ref3.webp" alt="TNG reference 3" loading="lazy"  decoding="async" />
+                <img src="tng-ref4.webp" alt="TNG reference 4" loading="lazy"  decoding="async" />
+                <img src="tng-ref5.webp" alt="TNG reference 5" loading="lazy"  decoding="async" />
+                <img src="tng-ref6.webp" alt="TNG reference 6" loading="lazy"  decoding="async" />
+                <img src="tng-ref7.webp" alt="TNG reference 7" loading="lazy"  decoding="async" />
+                <img src="tng-ref8.webp" alt="TNG reference 8" loading="lazy"  decoding="async" />
+                <img src="tng-ref9.webp" alt="TNG reference 9" loading="lazy"  decoding="async" />
+              </div>
+              <p class="tng-caption">Teenage Engineering Design Language</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- TNG Section 2: Sonos reference grid -->
+      <div class="oakley-section" id="tngSection2">
+        <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
+        <div class="oakley-inner">
+          <div class="oakley-layout" style="grid-template-columns: 1fr; justify-items: center;">
+            <div class="tng-grid-wrap">
+              <div class="tng-grid" id="sonosGrid">
+                <img src="sonos-ref1.webp" alt="Sonos reference 1" loading="lazy"  decoding="async" />
+                <img src="sonos-ref2.webp" alt="Sonos reference 2" loading="lazy"  decoding="async" />
+                <img src="sonos-ref3.webp" alt="Sonos reference 3" loading="lazy"  decoding="async" />
+                <img src="sonos-ref4.webp" alt="Sonos reference 4" loading="lazy"  decoding="async" />
+                <img src="sonos-ref5.webp" alt="Sonos reference 5" loading="lazy"  decoding="async" />
+                <img src="sonos-ref6.webp" alt="Sonos reference 6" loading="lazy"  decoding="async" />
+                <img src="sonos-ref7.webp" alt="Sonos reference 7" loading="lazy"  decoding="async" />
+                <img src="sonos-ref8.webp" alt="Sonos reference 8" loading="lazy"  decoding="async" />
+                <img src="sonos-ref9.webp" alt="Sonos reference 9" loading="lazy"  decoding="async" />
+              </div>
+              <p class="tng-caption" id="sonosCaption">Sonos Design Language</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- TNG Section 3: conclusion text + sketch grid -->
+      <div class="oakley-section" id="tngSection3">
+        <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
+        <div class="oakley-inner">
+          <div class="oakley-layout">
+            <div class="oakley-text" id="tngTextEl3">
+              <h2>Thought Process</h2>
+              <p>Recognizing the stronger visual identity of Teenage Engineering, I chose to adopt its distinctive aesthetic language while prioritizing the functional clarity and user experience characteristic of Sonos.</p>
+              <h2 style="margin-top: 32px;">Developing the Problem Statement</h2>
+              <p>Today, most TV Remotes have finicky, overly-complex, non-intuitive interfaces, as well as aesthetically unpleasing designs, and always get lost with no easy way to locate them.</p>
+            </div>
+            <div class="tng-sketch-grid" id="tngSketchGrid">
+              <img src="tng-sketch1.webp" alt="TNG sketch 1" loading="lazy"  decoding="async" />
+              <img src="tng-sketch2.webp" alt="TNG sketch 2" loading="lazy"  decoding="async" />
+              <img src="tng-sketch3.webp" alt="TNG sketch 3" loading="lazy"  decoding="async" />
+              <img src="tng-sketch4.webp" alt="TNG sketch 4" loading="lazy"  decoding="async" />
+              <img src="tng-sketch5.webp" alt="TNG sketch 5" loading="lazy"  decoding="async" />
+              <img src="tng-sketch6.webp" alt="TNG sketch 6" loading="lazy"  decoding="async" />
+              <img src="tng-sketch7.webp" alt="TNG sketch 7" loading="lazy"  decoding="async" />
+              <img src="tng-sketch8.webp" alt="TNG sketch 8" loading="lazy"  decoding="async" />
+              <img src="tng-sketch9.webp" alt="TNG sketch 9" loading="lazy"  decoding="async" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- TNG Section 4: Framing Questions -->
+      <div class="oakley-section" id="tngSection4">
+        <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
+        <div class="framing-inner">
+          <h2 class="framing-title" id="framingTitle">Framing Questions</h2>
+          <div class="framing-grid" id="framingGrid">
+            <div class="framing-col-label">How Might We</div>
+            <div class="framing-col-label">What If?</div>
+            <div class="framing-col-label">What If?</div>
+
+            <div class="framing-card hmw">HMW design a product that can be easily charged without disrupting flow?</div>
+            <div class="framing-card">what if these remotes are solar charged</div>
+            <div class="framing-card">what if this remote had a charging dock that traveled with the remote</div>
+
+            <div class="framing-card hmw">HMW we design our product to be both long lasting from a tech and physical standpoint?</div>
+            <div class="framing-card">what if we make a remote built for being tossed person to person and taking hits</div>
+            <div class="framing-card">what if we used heavy, sturdy materials that both are long lasting and feel premium</div>
+
+            <div class="framing-card hmw">HMW design a product that is easily understandable as soon as you pick it up?</div>
+            <div class="framing-card">what if this product is not too different from what people already know</div>
+            <div class="framing-card">what if this product took design language from a mouse or other technical aid</div>
+
+            <div class="framing-card hmw">HMW design a product that can be used for more than your tv?</div>
+            <div class="framing-card">what if this remote can connect to different devices when pointed at them</div>
+            <div class="framing-card">What if the features were so simple that you could program it for other aspects of your house</div>
+
+            <div class="framing-card hmw">HMW design the product to fit the needs of the most people possible?</div>
+            <div class="framing-card">what if this product can adapt / is modular so the user can remove/add features as needed</div>
+            <div class="framing-card">What if the product had speech control so you could ask it to do anything, and it would do it</div>
+          </div>
+          <h2 class="framing-title framing-summary" id="framingSummary">Opportunity Statement</h2>
+          <h2 class="framing-title framing-opp-text" id="framingOppText">As TVs have become sleek, high-end centerpieces, the remote has stayed a cheap, uncomfortable afterthought. This project reimagines the remote as a premium handheld device while fixing long-standing usability and design flaws.</h2>
+        </div>
+      </div>
+      <!-- TNG Section 5: gallery panels -->
+      <div class="oakley-section" id="tngSection5">
+        <span class="home-btn tng-home-btn" id="tngHomeBtn" role="button" tabindex="0" aria-label="Go to home">Home</span>
+        <div class="tng-gallery-scene" id="tngGallery">
+          <div class="tng-gallery-panel" style="--delay:0s">
+            <img src="tng-render1.webp" style="object-position: center center;" loading="lazy"  decoding="async" />
+          </div>
+          <div class="tng-gallery-panel" style="--delay:0.14s; --slide:0px">
+            <img src="tng-render3.webp" style="object-position: center center;" loading="lazy"  decoding="async" />
+          </div>
+          <div class="tng-gallery-panel" style="--delay:0.28s">
+            <img src="tng-render2.webp" style="object-position: center center;" loading="lazy"  decoding="async" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="oakley-progress-bar" style="position:relative;">
+      <div class="oakley-progress-fill" id="tngFill"></div>
+      <div class="scroll-hint" id="tngScrollHint">
+        Two finger scroll right
+        <div class="scroll-hint-arrow">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="scroll-hint hidden" id="tngScrollHintLeft">
+        <div class="scroll-hint-arrow rev">
+          <span></span><span></span><span></span>
+        </div>
+        Two finger scroll left
+      </div>
+      <div class="oakley-dots">
+        <div class="oakley-dot active" data-index="0"></div>
+        <div class="oakley-dot" data-index="1"></div>
+        <div class="oakley-dot" data-index="2"></div>
+        <div class="oakley-dot" data-index="3"></div>
+        <div class="oakley-dot" data-index="4"></div>
+      </div>
+    </div>
   </div>
 
   <div class="page project-page" id="page-ferro">
-    <span class="back-btn project-back">← Back</span>
+    <span class="next-btn" id="ferroNext" role="button" tabindex="0" aria-label="Next section">Next →</span>
+    <div class="ferro-hscroll" id="ferroHScroll">
+      <div class="oakley-section">
+        <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
+        <div class="oakley-inner">
+          <div class="oakley-layout">
+            <div class="oakley-text" id="ferroTextEl">
+              <h2>Synopsis</h2>
+              <p>A fantastical class assignment that tasked me with developing a potion for a unique purpose, I found myself drawn to the stark honesty of brutalist design—its raw forms, unembellished structure, and unapologetic clarity. I thought about applying this to my potion through both form and material.</p>
+            </div>
+            <div class="ferro-grid" id="ferroGrid">
+              <img class="fg-building" src="ferro-inspo3.webp"  alt="Brutalist building" decoding="async" />
+              <img class="fg-tomford"  src="ferro-inspo20.webp" alt="Tom Ford perfume"   decoding="async" />
+              <img class="fg-foil"     src="ferro-inspo21.webp" alt="Silver foil"        decoding="async" />
+              <img class="fg-cube"     src="ferro-inspo24.webp" alt="Metal cube"         decoding="async" />
+              <img class="fg-chair"    src="ferro-inspo23.webp" alt="Metal chair"        decoding="async" />
+              <img class="fg-bottle"   src="ferro-inspo18.webp" alt="Chrome bottle"      decoding="async" />
+              <img class="fg-theatre"  src="ferro-inspo4.webp"  alt="National Theatre"   decoding="async" />
+              <img class="fg-metal"    src="ferro-inspo22.webp" alt="Brushed metal"      decoding="async" />
+              <img class="fg-package"  src="ferro-inspo28.webp" alt="Packaged bottle"    decoding="async" />
+              <img class="fg-tea"      src="ferro-inspo25.webp" alt="Tea boxes"          decoding="async" />
+              <img class="fg-gradient" src="ferro-inspo29.webp" alt="Gray gradient"      decoding="async" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="oakley-section">
+        <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
+        <div class="ferro-brand-label" id="ferroBrandingText"><h2>Branding Inspiration</h2></div>
+        <span class="ferro-sec-next" id="ferroBrandNext" role="button" tabindex="0" aria-label="Next section">Next →</span>
+        <div class="ferro-brand-grid" id="ferroBrandGrid">
+          <img class="fbg-pkg"    src="ferro-brand1.webp" alt="Packaging reference"  decoding="async" />
+          <img class="fbg-abcd"   src="ferro-brand4.webp" alt="Typography reference" decoding="async" />
+          <img class="fbg-poster" src="ferro-brand3.webp" alt="Typographic poster"   decoding="async" />
+          <img class="fbg-tubes"  src="ferro-brand2.webp" alt="Product tubes"        decoding="async" />
+          <div class="fbg-fonts">
+            <div class="fbg-font-item"><span style="font-family:'Cute Font'">Ferro</span></div>
+            <div class="fbg-font-item"><span style="font-family:'Bungee Hairline'">Ferro</span></div>
+            <div class="fbg-font-item"><span style="font-family:'Fahkwang'">Ferro</span></div>
+            <div class="fbg-font-item"><span style="font-family:'IBM Plex Sans Devanagari',sans-serif;font-weight:700">Ferro</span></div>
+            <div class="fbg-font-item"><span style="font-family:'Lao Sans Pro'">Ferro</span></div>
+            <div class="fbg-font-item"><img src="ferro-brand5.webp" alt="FERRO" /></div>
+          </div>
+        </div>
+      </div>
+      <div class="oakley-section">
+        <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
+        <div class="ferro-brand-label" id="ferroSketchText">
+          <h2>Product and<br>Packaging Sketching</h2>
+        </div>
+        <div class="ferro-sketch-grid" id="ferroSketchGrid">
+          <img src="ferro-sketch1.webp"  alt="Sketch 1"  decoding="async" />
+          <img src="ferro-sketch2.webp"  alt="Sketch 2"  decoding="async" />
+          <img src="ferro-sketch3.webp"  alt="Sketch 3"  decoding="async" />
+          <img src="ferro-sketch4.webp"  alt="Sketch 4"  decoding="async" />
+          <img src="ferro-sketch5.webp"  alt="Sketch 5"  decoding="async" />
+          <img src="ferro-sketch6.webp"  alt="Sketch 6"  decoding="async" />
+          <img src="ferro-sketch7.webp"  alt="Sketch 7"  decoding="async" />
+          <img src="ferro-sketch8.webp"  alt="Sketch 8"  decoding="async" />
+          <img class="fsk-9"  src="ferro-sketch9.webp"  alt="Sketch 9"  decoding="async" />
+          <img class="fsk-10" src="ferro-sketch8.webp" alt="Sketch 10" decoding="async" />
+        </div>
+      </div>
+
+      <!-- Section 4: Color Palette -->
+      <div class="oakley-section">
+        <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
+        <div class="ferro-brand-label" id="ferroColorText">
+          <h2>Color Palette</h2>
+        </div>
+        <span class="ferro-sec-next" id="ferroColorNext" role="button" tabindex="0">Next →</span>
+        <div class="ferro-palette">
+          <!-- top center -->
+          <div class="fp-swatch" style="--clr:#A7A8A1; left:180px; top:15px;">
+            <div class="fp-circle"></div>
+            <div class="fp-label">
+              <span>#A7A8A1</span>
+              <span>RGB(167, 168, 161)</span>
+            </div>
+          </div>
+          <!-- top right -->
+          <div class="fp-swatch" style="--clr:#000000; --txt:#ffffff; left:337px; top:129px;">
+            <div class="fp-circle"></div>
+            <div class="fp-label">
+              <span>#000000</span>
+              <span>RGB(0, 0, 0)</span>
+            </div>
+          </div>
+          <!-- bottom right -->
+          <div class="fp-swatch" style="--clr:#C6C0C0; left:277px; top:313px;">
+            <div class="fp-circle"></div>
+            <div class="fp-label">
+              <span>#C6C0C0</span>
+              <span>RGB(198, 192, 192)</span>
+            </div>
+          </div>
+          <!-- bottom left -->
+          <div class="fp-swatch" style="--clr:#FFFFFF; left:83px; top:313px;">
+            <div class="fp-circle"></div>
+            <div class="fp-label">
+              <span>#FFFFFF</span>
+              <span>RGB(255, 255, 255)</span>
+            </div>
+          </div>
+          <!-- top left -->
+          <div class="fp-swatch" style="--clr:#D9D2D2; left:23px; top:129px;">
+            <div class="fp-circle"></div>
+            <div class="fp-label">
+              <span>#D9D2D2</span>
+              <span>RGB(217, 210, 210)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5: Word Mark & Logo Development -->
+      <div class="oakley-section">
+        <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
+        <div class="ferro-brand-label" id="ferroWordmarkText">
+          <h2>Word Mark &amp;<br>Logo Development</h2>
+        </div>
+        <span class="ferro-sec-next" id="ferroWordmarkNext" role="button" tabindex="0">Next →</span>
+        <div class="ferro-wordmark-center">
+          <img src="ferro-wordmark1.png" alt="Ferro wordmark v1" />
+          <img src="ferro-wordmark2.png" alt="Ferro wordmark v2" />
+        </div>
+      </div>
+
+      <!-- Section 6: Renders 3-up A -->
+      <div class="oakley-section ferro-render-section">
+        <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back" style="color:#fff;">← Back</span>
+        <span class="ferro-sec-next" id="ferroRender6Next" role="button" tabindex="0" style="color:#fff;">Next →</span>
+        <div class="ferro-3up" id="ferroRender6">
+          <img src="ferro-render5.jpg" alt="Render 5" decoding="async" />
+          <img src="ferro-render4.jpg" alt="Render 4" decoding="async" />
+          <img src="ferro-render6.jpg" alt="Render 6" decoding="async" />
+        </div>
+      </div>
+
+      <!-- Section 7: Renders 3-up B -->
+      <div class="oakley-section ferro-render-section">
+        <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back" style="color:#fff;">← Back</span>
+        <span class="ferro-sec-next" id="ferroRender7Next" role="button" tabindex="0" style="color:#fff;">Next →</span>
+        <div class="ferro-3up" id="ferroRender7">
+          <img src="ferro-render1.jpg" alt="Render 1" decoding="async" />
+          <img src="ferro-render2.jpg" alt="Render 2" decoding="async" />
+          <img src="ferro-render5.jpg" alt="Render 5" decoding="async" />
+        </div>
+      </div>
+
+      <!-- Section 8: Single render -->
+      <div class="oakley-section ferro-render-section">
+        <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back" style="color:#fff;">← Back</span>
+        <div class="ferro-single" id="ferroRender8">
+          <img src="ferro-render3.jpg" alt="Render scene" decoding="async" />
+        </div>
+      </div>
+
+    </div>
+    <div class="oakley-progress-bar" style="position:relative;">
+      <div class="oakley-progress-fill" id="ferroFill"></div>
+      <div class="scroll-hint" id="ferroScrollHint">
+        Two finger scroll right
+        <div class="scroll-hint-arrow"><span></span><span></span><span></span></div>
+      </div>
+      <div class="scroll-hint hidden" id="ferroScrollHintLeft">
+        <div class="scroll-hint-arrow rev"><span></span><span></span><span></span></div>
+        Two finger scroll left
+      </div>
+      <div class="oakley-dots">
+        <div class="oakley-dot active" data-index="0"></div>
+        <div class="oakley-dot" data-index="1"></div>
+        <div class="oakley-dot" data-index="2"></div>
+        <div class="oakley-dot" data-index="3"></div>
+        <div class="oakley-dot" data-index="4"></div>
+        <div class="oakley-dot" data-index="5"></div>
+        <div class="oakley-dot" data-index="6"></div>
+        <div class="oakley-dot" data-index="7"></div>
+      </div>
+    </div>
   </div>
 
   <div class="page" id="contact">
-    <span class="back-btn" id="contactBackBtn">← Back</span>
+    <span class="back-btn" id="contactBackBtn" role="button" tabindex="0" aria-label="Go back">← Back</span>
     <div class="contact-icons">
-      <a class="contact-icon" id="icon-twitter" href="https://x.com/OliverBPederson" target="_blank">
+      <a class="contact-icon" id="icon-twitter" href="https://x.com/OliverBPederson" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter profile">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       </a>
-      <a class="contact-icon" id="icon-linkedin" href="https://www.linkedin.com/in/oliver-pederson-8b1076264/" target="_blank">
+      <a class="contact-icon" id="icon-linkedin" href="https://www.linkedin.com/in/oliver-pederson-8b1076264/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
       </a>
       <div class="email-wrapper" id="emailWrapper">
-        <a class="contact-icon" id="icon-email">
+        <a class="contact-icon" id="icon-email" aria-label="Email contact">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
         </a>
         <div class="email-info">
@@ -853,7 +1607,7 @@
   </div>
 
   <div class="page" id="philosophy">
-    <span class="back-btn" id="backBtn">← Back</span>
+    <span class="back-btn" id="backBtn" role="button" tabindex="0" aria-label="Go back">← Back</span>
     <div class="philosophy-text">
       <p>I believe design reaches beyond the familiar north star of form follows function. While indispensable, truly great design does not exist solely at the intersection of utility and aesthetics. It begins with rigorous research, the careful uncovering of hidden pain points, and a clear understanding of the broader market landscape.</p>
       <p>Great design asks not only how something should work, but why it must exist and who it ultimately serves. It translates human needs, cultural context, and technological possibility into solutions that feel both intuitive and meaningful.</p>
@@ -863,7 +1617,7 @@
   </div>
 
   <div class="page" id="hero">
-    <div class="square-btn" id="squareBtn"></div>
+    <div class="square-btn" id="squareBtn" role="button" tabindex="0" aria-label="Enter portfolio"></div>
     <div class="hero-text">
       <span class="line" id="line1"></span>
       <span class="line" id="line2"><span class="cursor" id="cur"></span></span>
@@ -930,8 +1684,6 @@
     bioObserver.observe(bioP);
 
     // ── Image carousel ───────────────────────────────────────
-    const imgs = document.querySelectorAll('#galleryCard img');
-    let current = 0;
     function makeCarousel(cardId, imgList) {
       let cur = 0;
       document.getElementById(cardId).addEventListener('click', () => {
@@ -950,13 +1702,9 @@
       });
     }
 
-    makeCarousel('galleryCard', Array.from(imgs));
-
-    const tngImgs = document.querySelectorAll('#tngCard img');
-    makeCarousel('tngCard', Array.from(tngImgs));
-
-    const ferroImgs = document.querySelectorAll('#ferroCard img');
-    makeCarousel('ferroCard', Array.from(ferroImgs));
+    makeCarousel('galleryCard', Array.from(document.querySelectorAll('#galleryCard img')));
+    makeCarousel('tngCard',     Array.from(document.querySelectorAll('#tngCard img')));
+    makeCarousel('ferroCard',   Array.from(document.querySelectorAll('#ferroCard img')));
 
     const curtain = document.getElementById('curtain');
 
@@ -993,12 +1741,36 @@
     document.getElementById('btn-tng').addEventListener('click', () => curtainOpen('page-tng'));
     document.getElementById('btn-ferro').addEventListener('click', () => curtainOpen('page-ferro'));
 
+    document.getElementById('cadHomeBtn').addEventListener('click', () => {
+      const page = document.querySelector('.project-page.visible');
+      if (page) curtainClose(page);
+    });
+
     document.querySelectorAll('.project-back').forEach(btn => {
       btn.addEventListener('click', () => {
         const page = document.querySelector('.project-page.visible');
         if (page) curtainClose(page);
       });
     });
+
+    (function () {
+      const scroller = document.getElementById('oakleyHScroll');
+      const nextBtn  = document.getElementById('oakleyNext');
+      const sections = scroller.querySelectorAll('.oakley-section').length;
+
+      nextBtn.addEventListener('click', () => {
+        const cur  = Math.round(scroller.scrollLeft / scroller.clientWidth);
+        const next = Math.min(cur + 1, sections - 1);
+        scroller.scrollTo({ left: next * scroller.clientWidth, behavior: 'smooth' });
+      });
+
+      // Hide Next on last section, show otherwise
+      scroller.addEventListener('scroll', () => {
+        const cur = Math.round(scroller.scrollLeft / scroller.clientWidth);
+        nextBtn.style.opacity = cur >= sections - 1 ? '0' : '1';
+        nextBtn.style.pointerEvents = cur >= sections - 1 ? 'none' : 'auto';
+      }, { passive: true });
+    })();
 
     document.querySelector('.nav-center').addEventListener('click', () => {
       document.getElementById('philosophy').classList.add('visible');
@@ -1007,35 +1779,13 @@
       document.getElementById('philosophy').classList.remove('visible');
     });
 
-    // Split tagline into character spans for dissolve
     const tagline = document.querySelector('.contact-tagline');
-    const taglineText = tagline.textContent;
-    tagline.innerHTML = taglineText.split('').map(ch =>
-      ch === ' '
-        ? '<span class="char space"> </span>'
-        : `<span class="char">${ch}</span>`
-    ).join('');
-    const chars = tagline.querySelectorAll('.char');
 
     function dissolveIn() {
-      chars.forEach((ch, i) => {
-        setTimeout(() => {
-          ch.style.opacity   = '1';
-          ch.style.filter    = 'blur(0px)';
-          ch.style.transform = 'translateY(0px)';
-        }, 400 + i * 38);
-      });
+      setTimeout(() => tagline.classList.add('revealed'), 900);
     }
     function dissolveOut() {
-      chars.forEach(ch => {
-        ch.style.transition = 'none';
-        ch.style.opacity   = '0';
-        ch.style.filter    = 'blur(12px)';
-        ch.style.transform = 'translateY(18px)';
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          ch.style.transition = '';
-        }));
-      });
+      tagline.classList.remove('revealed');
     }
 
     document.querySelector('.nav-right').addEventListener('click', () => {
@@ -1088,8 +1838,8 @@
       }
     }
 
-    smoothScroll(document.querySelector('.col-left'), 0.14);
-    smoothScroll(document.querySelector('.col-right'), 0.14);
+    smoothScroll(document.querySelector('.col-left'), 0.32);
+    smoothScroll(document.querySelector('.col-right'), 0.32);
 
     // ── Oakley page entrance animation ───────────────────────────
     (function () {
@@ -1100,7 +1850,7 @@
       function reset() {
         textEl.style.transition = 'none';
         textEl.style.opacity    = '0';
-        textEl.querySelector('p').classList.remove('dissolved');
+        Array.from(textEl.querySelectorAll('p, h2')).forEach(el => el.classList.remove('dissolved'));
         Array.from(gridEl.querySelectorAll('img')).forEach(img => {
           img.style.transition = 'none';
           img.style.opacity    = '0';
@@ -1126,7 +1876,7 @@
             const dy = cy - (r.top  + r.height / 2);
             offsets.push({ dx, dy });
             img.style.transition = 'none';
-            img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.85)`;
+            img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
             img.style.opacity    = '0';
             img.style.zIndex     = String(imgs.length - i);
           });
@@ -1135,27 +1885,27 @@
           setTimeout(() => {
             textEl.style.transition = 'none';
             textEl.style.opacity    = '1';
-            setTimeout(() => textEl.querySelector('p').classList.add('dissolved'), 150);
+            Array.from(textEl.querySelectorAll('h2, p')).forEach((el, i) => { setTimeout(() => el.classList.add('dissolved'), 150 + i * 350); });
           }, 500);
 
-          // Show stacked images (fade + scale up to 1)
+          // Show stacked images at scale(0.5) — small and condensed
           setTimeout(() => {
             imgs.forEach((img, i) => {
               const { dx, dy } = offsets[i];
-              img.style.transition = `opacity 0.35s ease ${i * 0.04}s, transform 0.35s ease ${i * 0.04}s`;
+              img.style.transition = `opacity 0.3s ease ${i * 0.03}s`;
               img.style.opacity    = '1';
-              img.style.transform  = `translate(${dx}px, ${dy}px) scale(1)`;
+              img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
             });
-          }, 1500);
+          }, 1000);
 
-          // Spread to grid positions
+          // Spread to grid — scale grows to 1 as they fly out
           setTimeout(() => {
             imgs.forEach((img, i) => {
-              img.style.transition = `transform 1.4s cubic-bezier(0.34, 1.1, 0.64, 1) ${i * 0.12}s`;
+              img.style.transition = `transform 1.1s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.09}s`;
               img.style.transform  = 'translate(0px, 0px) scale(1)';
             });
-            setTimeout(() => imgs.forEach(img => { img.style.zIndex = ''; }), 2200);
-          }, 2100);
+            setTimeout(() => imgs.forEach(img => { img.style.zIndex = ''; }), 1800);
+          }, 1250);
         }));
       }
 
@@ -1167,6 +1917,498 @@
           document.getElementById('oakleyHScroll').scrollLeft = 0;
           document.getElementById('scrollHint').classList.remove('hidden');
           document.getElementById('scrollHintLeft').classList.add('hidden');
+        } else {
+          reset();
+        }
+      });
+      observer.observe(page, { attributes: true, attributeFilter: ['class'] });
+      reset();
+    })();
+
+    // ── Ferro page entrance animation ───────────────────────────
+    (function () {
+      const page   = document.getElementById('page-ferro');
+      const textEl = document.getElementById('ferroTextEl');
+      const gridEl = document.getElementById('ferroGrid');
+
+      function reset() {
+        textEl.style.transition = 'none';
+        textEl.style.opacity    = '0';
+        Array.from(textEl.querySelectorAll('h2, p')).forEach(el => el.classList.remove('dissolved'));
+        Array.from(gridEl.querySelectorAll('img')).forEach(img => {
+          img.style.transition = 'none';
+          img.style.opacity    = '0';
+          img.style.transform  = '';
+          img.style.zIndex     = '';
+        });
+      }
+
+      function run() {
+        const imgs    = Array.from(gridEl.querySelectorAll('img'));
+        const offsets = [];
+
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          const gr = gridEl.getBoundingClientRect();
+          const cx = gr.left + gr.width  / 2;
+          const cy = gr.top  + gr.height / 2;
+
+          imgs.forEach((img, i) => {
+            const r  = img.getBoundingClientRect();
+            const dx = cx - (r.left + r.width  / 2);
+            const dy = cy - (r.top  + r.height / 2);
+            offsets.push({ dx, dy });
+            img.style.transition = 'none';
+            img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
+            img.style.opacity    = '0';
+            img.style.zIndex     = String(imgs.length - i);
+          });
+
+          // Text dissolves in
+          setTimeout(() => {
+            textEl.style.transition = 'none';
+            textEl.style.opacity    = '1';
+            Array.from(textEl.querySelectorAll('h2, p')).forEach((el, i) => {
+              setTimeout(() => el.classList.add('dissolved'), 150 + i * 350);
+            });
+          }, 500);
+
+          // Images fade in at center
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              const { dx, dy } = offsets[i];
+              img.style.transition = `opacity 0.3s ease ${i * 0.03}s`;
+              img.style.opacity    = '1';
+              img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
+            });
+          }, 1000);
+
+          // Images spread to final grid positions
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              img.style.transition = `transform 1.1s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.09}s`;
+              img.style.transform  = 'translate(0px, 0px) scale(1)';
+            });
+            setTimeout(() => imgs.forEach(img => { img.style.zIndex = ''; }), 1800);
+          }, 1250);
+        }));
+      }
+
+      const observer = new MutationObserver(() => {
+        if (page.classList.contains('visible')) {
+          reset();
+          document.getElementById('ferroHScroll').scrollLeft = 0;
+          document.getElementById('ferroScrollHint').classList.remove('hidden');
+          document.getElementById('ferroScrollHintLeft').classList.add('hidden');
+          document.getElementById('ferroBrandingText').style.opacity = '0';
+          document.getElementById('ferroBrandNext').style.opacity    = '0';
+          document.getElementById('ferroSketchText').style.opacity   = '0';
+          document.getElementById('ferroColorText').style.opacity    = '0';
+          document.getElementById('ferroColorNext').style.opacity    = '0';
+          document.getElementById('ferroRender6Next').style.opacity  = '0';
+          document.getElementById('ferroRender7Next').style.opacity  = '0';
+          setTimeout(run, 300);
+        } else {
+          reset();
+        }
+      });
+      observer.observe(page, { attributes: true, attributeFilter: ['class'] });
+      reset();
+    })();
+
+    // ── Ferro Next button + progress bar ────────────────────────
+    (function () {
+      const scroller = document.getElementById('ferroHScroll');
+      const nextBtn  = document.getElementById('ferroNext');
+      const fill     = document.getElementById('ferroFill');
+      const dots     = Array.from(document.querySelectorAll('#page-ferro .oakley-dot'));
+      const hint     = document.getElementById('ferroScrollHint');
+      const hintLeft = document.getElementById('ferroScrollHintLeft');
+      const sections = scroller.querySelectorAll('.oakley-section').length;
+
+      nextBtn.addEventListener('click', () => {
+        const cur  = Math.round(scroller.scrollLeft / scroller.clientWidth);
+        const next = Math.min(cur + 1, sections - 1);
+        scroller.scrollTo({ left: next * scroller.clientWidth, behavior: 'smooth' });
+      });
+
+      scroller.addEventListener('scroll', () => {
+        const max      = scroller.scrollWidth - scroller.clientWidth;
+        const progress = max > 0 ? scroller.scrollLeft / max : 0;
+        fill.style.width = (progress * 100) + '%';
+        if (scroller.scrollLeft > 10) hint.classList.add('hidden');
+        hintLeft.classList.toggle('hidden', scroller.scrollLeft < 10);
+        const idx = Math.round(progress * (dots.length - 1));
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        const cur = Math.round(scroller.scrollLeft / scroller.clientWidth);
+        nextBtn.style.opacity      = cur >= sections - 1 ? '0' : '1';
+        nextBtn.style.pointerEvents = cur >= sections - 1 ? 'none' : 'auto';
+        // Animate Branding label + section next btn when section 2 comes into view
+        document.getElementById('ferroBrandingText').style.opacity = cur >= 1 ? '1' : '0';
+        document.getElementById('ferroBrandNext').style.opacity    = cur >= 1 ? '1' : '0';
+        document.getElementById('ferroSketchText').style.opacity   = cur >= 2 ? '1' : '0';
+        document.getElementById('ferroColorText').style.opacity    = cur >= 3 ? '1' : '0';
+        document.getElementById('ferroColorNext').style.opacity    = cur >= 3 ? '1' : '0';
+      }, { passive: true });
+
+      document.getElementById('ferroColorNext').addEventListener('click', () => {
+        const cur  = Math.round(scroller.scrollLeft / scroller.clientWidth);
+        const next = Math.min(cur + 1, sections - 1);
+        scroller.scrollTo({ left: next * scroller.clientWidth, behavior: 'smooth' });
+      });
+
+      document.getElementById('ferroBrandNext').addEventListener('click', () => {
+        const cur  = Math.round(scroller.scrollLeft / scroller.clientWidth);
+        const next = Math.min(cur + 1, sections - 1);
+        scroller.scrollTo({ left: next * scroller.clientWidth, behavior: 'smooth' });
+      });
+    })();
+
+    // ── Ferro branding grid animation (section 2) ────────────────
+    (function () {
+      const scroller = document.getElementById('ferroHScroll');
+      const gridEl   = document.getElementById('ferroBrandGrid');
+      let   animated = false;
+
+      function resetGrid() {
+        animated = false;
+        Array.from(gridEl.children).forEach(el => {
+          el.style.transition = 'none';
+          el.style.opacity    = '0';
+          el.style.transform  = '';
+          el.style.zIndex     = '';
+        });
+      }
+
+      function runGrid() {
+        if (animated) return;
+        animated = true;
+        const items   = Array.from(gridEl.children);
+        const offsets = [];
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          const gr = gridEl.getBoundingClientRect();
+          const cx = gr.left + gr.width  / 2;
+          const cy = gr.top  + gr.height / 2;
+
+          items.forEach((el, i) => {
+            const r  = el.getBoundingClientRect();
+            const dx = cx - (r.left + r.width  / 2);
+            const dy = cy - (r.top  + r.height / 2);
+            offsets.push({ dx, dy });
+            el.style.transition = 'none';
+            el.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
+            el.style.opacity    = '0';
+            el.style.zIndex     = String(items.length - i);
+          });
+
+          setTimeout(() => {
+            items.forEach((el, i) => {
+              const { dx, dy } = offsets[i];
+              el.style.transition = `opacity 0.3s ease ${i * 0.04}s`;
+              el.style.opacity    = '1';
+              el.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
+            });
+          }, 250);
+
+          setTimeout(() => {
+            items.forEach((el, i) => {
+              el.style.transition = `transform 1.1s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.1}s`;
+              el.style.transform  = 'translate(0px, 0px) scale(1)';
+            });
+            setTimeout(() => items.forEach(el => { el.style.zIndex = ''; }), 1800);
+          }, 500);
+        }));
+      }
+
+      scroller.addEventListener('scroll', function () {
+        if (this.scrollLeft >= this.clientWidth * 0.5) runGrid();
+        if (this.scrollLeft < 10) { animated = false; resetGrid(); }
+      }, { passive: true });
+
+      const page = document.getElementById('page-ferro');
+      const obs  = new MutationObserver(() => {
+        if (!page.classList.contains('visible')) { animated = false; resetGrid(); }
+      });
+      obs.observe(page, { attributes: true, attributeFilter: ['class'] });
+    })();
+
+    // ── Arrow key navigation for all horizontal-scroll pages ────
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      const page = document.querySelector('.project-page.visible');
+      if (!page) return;
+      const scroller = page.querySelector('[id$="HScroll"]');
+      if (!scroller) return;
+      const dir = e.key === 'ArrowRight' ? 1 : -1;
+      const cur = Math.round(scroller.scrollLeft / scroller.clientWidth);
+      scroller.scrollTo({ left: (cur + dir) * scroller.clientWidth, behavior: 'smooth' });
+    });
+
+    // ── Ferro sketch grid animation (section 3) ─────────────────
+    (function () {
+      const scroller = document.getElementById('ferroHScroll');
+      const gridEl   = document.getElementById('ferroSketchGrid');
+      let   animated = false;
+
+      function resetGrid() {
+        animated = false;
+        Array.from(gridEl.querySelectorAll('img')).forEach(img => {
+          img.style.transition = 'none';
+          img.style.opacity    = '0';
+          img.style.transform  = '';
+          img.style.zIndex     = '';
+        });
+      }
+
+      function runGrid() {
+        if (animated) return;
+        animated = true;
+        const imgs    = Array.from(gridEl.querySelectorAll('img'));
+        const offsets = [];
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          const gr = gridEl.getBoundingClientRect();
+          const cx = gr.left + gr.width  / 2;
+          const cy = gr.top  + gr.height / 2;
+
+          imgs.forEach((img, i) => {
+            const r  = img.getBoundingClientRect();
+            const dx = cx - (r.left + r.width  / 2);
+            const dy = cy - (r.top  + r.height / 2);
+            offsets.push({ dx, dy });
+            img.style.transition = 'none';
+            img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
+            img.style.opacity    = '0';
+            img.style.zIndex     = String(imgs.length - i);
+          });
+
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              const { dx, dy } = offsets[i];
+              img.style.transition = `opacity 0.3s ease ${i * 0.03}s`;
+              img.style.opacity    = '1';
+              img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
+            });
+          }, 250);
+
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              img.style.transition = `transform 1.1s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.09}s`;
+              img.style.transform  = 'translate(0px, 0px) scale(1)';
+            });
+            setTimeout(() => imgs.forEach(img => { img.style.zIndex = ''; }), 1800);
+          }, 500);
+        }));
+      }
+
+      scroller.addEventListener('scroll', function () {
+        if (this.scrollLeft >= this.clientWidth * 1.5) runGrid();
+        if (this.scrollLeft < this.clientWidth * 0.5) { animated = false; resetGrid(); }
+      }, { passive: true });
+
+      const page = document.getElementById('page-ferro');
+      const obs  = new MutationObserver(() => {
+        if (!page.classList.contains('visible')) { animated = false; resetGrid(); }
+      });
+      obs.observe(page, { attributes: true, attributeFilter: ['class'] });
+    })();
+
+    // ── Ferro wordmark animation (section 5) ────────────────────
+    (function () {
+      const scroller  = document.getElementById('ferroHScroll');
+      const imgs      = Array.from(document.querySelectorAll('.ferro-wordmark-center img'));
+      const labelEl   = document.getElementById('ferroWordmarkText');
+      const nextBtn   = document.getElementById('ferroWordmarkNext');
+      let   animated  = false;
+
+      function reset() {
+        animated = false;
+        imgs.forEach(img => {
+          img.style.transition = 'none';
+          img.style.opacity    = '0';
+          img.style.transform  = 'translateY(22px)';
+        });
+        Array.from(labelEl.querySelectorAll('h2')).forEach(el => el.classList.remove('dissolved'));
+        labelEl.style.opacity  = '0';
+        nextBtn.style.opacity  = '0';
+      }
+
+      function run() {
+        if (animated) return;
+        animated = true;
+        // Fade-dissolve header text + show next btn
+        labelEl.style.opacity = '1';
+        nextBtn.style.opacity = '1';
+        setTimeout(() => labelEl.querySelector('h2').classList.add('dissolved'), 100);
+        // Staggered fade-up images using double rAF so transition: none is flushed first
+        imgs.forEach((img, i) => {
+          setTimeout(() => {
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+              img.style.transition = 'opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+              img.style.opacity    = '1';
+              img.style.transform  = 'translateY(0)';
+            }));
+          }, 200 + i * 200);
+        });
+      }
+
+      scroller.addEventListener('scroll', function () {
+        if (this.scrollLeft >= this.clientWidth * 3.5) run();
+        if (this.scrollLeft < this.clientWidth * 3)   reset();
+      }, { passive: true });
+
+      nextBtn.addEventListener('click', () => {
+        const sections = scroller.querySelectorAll('.oakley-section').length;
+        const cur  = Math.round(scroller.scrollLeft / scroller.clientWidth);
+        const next = Math.min(cur + 1, sections - 1);
+        scroller.scrollTo({ left: next * scroller.clientWidth, behavior: 'smooth' });
+      });
+
+      const page = document.getElementById('page-ferro');
+      const obs  = new MutationObserver(() => {
+        if (!page.classList.contains('visible')) reset();
+      });
+      obs.observe(page, { attributes: true, attributeFilter: ['class'] });
+      reset();
+    })();
+
+    // ── Ferro render animations (sections 6–8) ──────────────────
+    (function () {
+      const scroller = document.getElementById('ferroHScroll');
+      const page     = document.getElementById('page-ferro');
+
+      function makeAnim(id, minIdx, resetIdx) {
+        const el  = document.getElementById(id);
+        let anim  = false;
+        function reset() {
+          anim = false;
+          Array.from(el.querySelectorAll('img')).forEach(img => {
+            img.style.transition = 'none';
+            img.style.opacity    = '0';
+            img.style.transform  = 'translateY(28px)';
+          });
+        }
+        function run() {
+          if (anim) return;
+          anim = true;
+          Array.from(el.querySelectorAll('img')).forEach((img, i) => {
+            setTimeout(() => {
+              requestAnimationFrame(() => requestAnimationFrame(() => {
+                img.style.transition = 'opacity 0.75s ease, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1)';
+                img.style.opacity    = '1';
+                img.style.transform  = 'translateY(0)';
+              }));
+            }, i * 140);
+          });
+        }
+        scroller.addEventListener('scroll', function () {
+          if (this.scrollLeft >= this.clientWidth * minIdx)   run();
+          if (this.scrollLeft < this.clientWidth * resetIdx)  reset();
+        }, { passive: true });
+        const obs = new MutationObserver(() => { if (!page.classList.contains('visible')) reset(); });
+        obs.observe(page, { attributes: true, attributeFilter: ['class'] });
+        reset();
+        return { run, reset };
+      }
+
+      makeAnim('ferroRender6', 4.5, 4);
+      makeAnim('ferroRender7', 5.5, 5);
+      makeAnim('ferroRender8', 6.5, 6);
+
+      // Next button wiring
+      const sections = scroller.querySelectorAll('.oakley-section').length;
+      ['ferroRender6Next', 'ferroRender7Next'].forEach(id => {
+        document.getElementById(id).addEventListener('click', () => {
+          const cur = Math.round(scroller.scrollLeft / scroller.clientWidth);
+          scroller.scrollTo({ left: Math.min(cur + 1, sections - 1) * scroller.clientWidth, behavior: 'smooth' });
+        });
+      });
+
+      // Show/hide next buttons based on scroll position
+      scroller.addEventListener('scroll', function () {
+        const cur = Math.round(this.scrollLeft / this.clientWidth);
+        document.getElementById('ferroRender6Next').style.opacity = cur === 5 ? '1' : '0';
+        document.getElementById('ferroRender7Next').style.opacity = cur === 6 ? '1' : '0';
+      }, { passive: true });
+    })();
+
+    // ── TNG page entrance animation ───────────────────────────────
+    (function () {
+      const page      = document.getElementById('page-tng');
+      const textEl    = document.getElementById('tngTextEl');
+      const gridEl    = document.getElementById('tngGrid');
+      const captionEl = page.querySelector('.tng-caption');
+
+      function reset() {
+        textEl.style.transition    = 'none';
+        textEl.style.opacity       = '0';
+        Array.from(textEl.querySelectorAll('p, h2')).forEach(el => el.classList.remove('dissolved'));
+        captionEl.style.transition = 'none';
+        captionEl.style.opacity    = '0';
+        Array.from(gridEl.querySelectorAll('img')).forEach(img => {
+          img.style.transition = 'none';
+          img.style.opacity    = '0';
+          img.style.transform  = '';
+          img.style.zIndex     = '';
+        });
+      }
+
+      function run() {
+        const imgs    = Array.from(gridEl.querySelectorAll('img'));
+        const offsets = [];
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          const gr = gridEl.getBoundingClientRect();
+          const cx = gr.left + gr.width  / 2;
+          const cy = gr.top  + gr.height / 2;
+
+          imgs.forEach((img, i) => {
+            const r  = img.getBoundingClientRect();
+            const dx = cx - (r.left + r.width  / 2);
+            const dy = cy - (r.top  + r.height / 2);
+            offsets.push({ dx, dy });
+            img.style.transition = 'none';
+            img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
+            img.style.opacity    = '0';
+            img.style.zIndex     = String(imgs.length - i);
+          });
+
+          setTimeout(() => {
+            textEl.style.transition = 'none';
+            textEl.style.opacity    = '1';
+            Array.from(textEl.querySelectorAll('h2, p')).forEach((el, i) => { setTimeout(() => el.classList.add('dissolved'), 150 + i * 350); });
+          }, 500);
+
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              const { dx, dy } = offsets[i];
+              img.style.transition = `opacity 0.3s ease ${i * 0.03}s`;
+              img.style.opacity    = '1';
+              img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
+            });
+          }, 1000);
+
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              img.style.transition = `transform 1.1s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.09}s`;
+              img.style.transform  = 'translate(0px, 0px) scale(1)';
+            });
+            setTimeout(() => imgs.forEach(img => { img.style.zIndex = ''; }), 1800);
+          }, 1250);
+
+          // Fade caption in after last image finishes spreading (1250 + 720ms stagger + 1100ms duration)
+          setTimeout(() => {
+            captionEl.style.transition = '';
+            captionEl.style.opacity    = '1';
+          }, 3150);
+        }));
+      }
+
+      const observer = new MutationObserver(() => {
+        if (page.classList.contains('visible')) {
+          reset();
+          setTimeout(run, 700);
+          // Reset TNG scroll position and hints
+          document.getElementById('tngHScroll').scrollLeft = 0;
+          document.getElementById('tngScrollHint').classList.remove('hidden');
+          document.getElementById('tngScrollHintLeft').classList.add('hidden');
         } else {
           reset();
         }
@@ -1260,6 +2502,81 @@
       }).observe(oakleyPage, { attributes: true, attributeFilter: ['class'] });
     })();
 
+    // ── CAD section animation (section 3) ────────────────────────
+    (function () {
+      const section  = document.getElementById('section3');
+      const labelEl  = document.getElementById('cadLabel');
+      const gridEl   = document.getElementById('cadGrid');
+      let   animated = false;
+
+      function resetCad() {
+        animated = false;
+        labelEl.style.transition = 'none';
+        labelEl.style.opacity    = '0';
+        Array.from(gridEl.querySelectorAll('img')).forEach(img => {
+          img.style.transition = 'none';
+          img.style.opacity    = '0';
+          img.style.transform  = '';
+          img.style.zIndex     = '';
+        });
+      }
+
+      function runCad() {
+        if (animated) return;
+        animated = true;
+        const imgs    = Array.from(gridEl.querySelectorAll('img'));
+        const offsets = [];
+
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          const gr = gridEl.getBoundingClientRect();
+          const cx = gr.left + gr.width  / 2;
+          const cy = gr.top  + gr.height / 2;
+
+          imgs.forEach((img, i) => {
+            const r  = img.getBoundingClientRect();
+            const dx = cx - (r.left + r.width  / 2);
+            const dy = cy - (r.top  + r.height / 2);
+            offsets.push({ dx, dy });
+            img.style.transition = 'none';
+            img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
+            img.style.opacity    = '0';
+            img.style.zIndex     = String(imgs.length - i);
+          });
+
+          setTimeout(() => {
+            labelEl.style.transition = 'none';
+            labelEl.style.opacity    = '1';
+          }, 400);
+
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              const { dx, dy } = offsets[i];
+              img.style.transition = `opacity 0.3s ease ${i * 0.03}s`;
+              img.style.opacity    = '1';
+              img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
+            });
+          }, 1000);
+
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              img.style.transition = `transform 1.1s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.09}s`;
+              img.style.transform  = 'translate(0px, 0px) scale(1)';
+            });
+            setTimeout(() => imgs.forEach(img => { img.style.zIndex = ''; }), 1800);
+          }, 1250);
+        }));
+      }
+
+      document.getElementById('oakleyHScroll').addEventListener('scroll', function () {
+        if (this.scrollLeft >= this.clientWidth * 1.5) runCad();
+      }, { passive: true });
+
+      const oakleyPage = document.getElementById('page-oakley');
+      new MutationObserver(() => {
+        if (!oakleyPage.classList.contains('visible')) resetCad();
+      }).observe(oakleyPage, { attributes: true, attributeFilter: ['class'] });
+    })();
+
     // ── Oakley horizontal scroll progress bar ─────────────────────
     (function () {
       const scroller = document.getElementById('oakleyHScroll');
@@ -1281,6 +2598,301 @@
         const idx = Math.round(progress * (dots.length - 1));
         dots.forEach((d, i) => d.classList.toggle('active', i === idx));
       }, { passive: true });
+    })();
+
+    // ── TNG Next button ───────────────────────────────────────────
+    (function () {
+      const scroller = document.getElementById('tngHScroll');
+      const nextBtn  = document.getElementById('tngNext');
+      const sections = scroller.querySelectorAll('.oakley-section').length;
+
+      nextBtn.addEventListener('click', () => {
+        const cur  = Math.round(scroller.scrollLeft / scroller.clientWidth);
+        const next = Math.min(cur + 1, sections - 1);
+        scroller.scrollTo({ left: next * scroller.clientWidth, behavior: 'smooth' });
+      });
+
+      scroller.addEventListener('scroll', () => {
+        const cur = Math.round(scroller.scrollLeft / scroller.clientWidth);
+        nextBtn.style.opacity = cur >= sections - 1 ? '0' : '1';
+        nextBtn.style.pointerEvents = cur >= sections - 1 ? 'none' : 'auto';
+      }, { passive: true });
+    })();
+
+    // ── TNG horizontal scroll progress bar ────────────────────────
+    (function () {
+      const scroller = document.getElementById('tngHScroll');
+      const fill     = document.getElementById('tngFill');
+      const dots     = Array.from(document.querySelectorAll('#page-tng .oakley-dot'));
+      const hint     = document.getElementById('tngScrollHint');
+      const hintLeft = document.getElementById('tngScrollHintLeft');
+
+      scroller.addEventListener('scroll', () => {
+        const max      = scroller.scrollWidth - scroller.clientWidth;
+        const progress = max > 0 ? scroller.scrollLeft / max : 0;
+        fill.style.width = (progress * 100) + '%';
+
+        if (scroller.scrollLeft > 10) hint.classList.add('hidden');
+        hintLeft.classList.toggle('hidden', scroller.scrollLeft < 10);
+
+        const idx = Math.round(progress * (dots.length - 1));
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }, { passive: true });
+    })();
+
+    // ── Sonos grid animation (TNG section 2) ─────────────────────
+    (function () {
+      const gridEl    = document.getElementById('sonosGrid');
+      const captionEl = document.getElementById('sonosCaption');
+      const scroller  = document.getElementById('tngHScroll');
+      let   animated  = false;
+
+      function resetSonos() {
+        animated = false;
+        captionEl.style.transition = 'none';
+        captionEl.style.opacity    = '0';
+        Array.from(gridEl.querySelectorAll('img')).forEach(img => {
+          img.style.transition = 'none';
+          img.style.opacity    = '0';
+          img.style.transform  = '';
+          img.style.zIndex     = '';
+        });
+      }
+
+      function runSonos() {
+        if (animated) return;
+        animated = true;
+        const imgs    = Array.from(gridEl.querySelectorAll('img'));
+        const offsets = [];
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          const gr = gridEl.getBoundingClientRect();
+          const cx = gr.left + gr.width  / 2;
+          const cy = gr.top  + gr.height / 2;
+
+          imgs.forEach((img, i) => {
+            const r  = img.getBoundingClientRect();
+            const dx = cx - (r.left + r.width  / 2);
+            const dy = cy - (r.top  + r.height / 2);
+            offsets.push({ dx, dy });
+            img.style.transition = 'none';
+            img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
+            img.style.opacity    = '0';
+            img.style.zIndex     = String(imgs.length - i);
+          });
+
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              const { dx, dy } = offsets[i];
+              img.style.transition = `opacity 0.3s ease ${i * 0.03}s`;
+              img.style.opacity    = '1';
+              img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
+            });
+          }, 250);
+
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              img.style.transition = `transform 1.1s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.09}s`;
+              img.style.transform  = 'translate(0px, 0px) scale(1)';
+            });
+            setTimeout(() => imgs.forEach(img => { img.style.zIndex = ''; }), 1800);
+          }, 500);
+
+          setTimeout(() => {
+            captionEl.style.transition = '';
+            captionEl.style.opacity    = '1';
+          }, 2400);
+        }));
+      }
+
+      // Trigger when user scrolls to section 2
+      scroller.addEventListener('scroll', function () {
+        if (this.scrollLeft >= this.clientWidth * 0.5) runSonos();
+      }, { passive: true });
+
+      // Reset when TNG page closes
+      const page = document.getElementById('page-tng');
+      const obs  = new MutationObserver(() => {
+        if (!page.classList.contains('visible')) resetSonos();
+      });
+      obs.observe(page, { attributes: true, attributeFilter: ['class'] });
+      resetSonos();
+    })();
+
+    // ── TNG section 3 text + sketch animation ─────────────────────
+    (function () {
+      const textEl   = document.getElementById('tngTextEl3');
+      const gridEl   = document.getElementById('tngSketchGrid');
+      const scroller = document.getElementById('tngHScroll');
+      const page     = document.getElementById('page-tng');
+      let   animated = false;
+
+      function resetSection3() {
+        animated = false;
+        textEl.style.transition = 'none';
+        textEl.style.opacity    = '0';
+        Array.from(textEl.querySelectorAll('p, h2')).forEach(el => el.classList.remove('dissolved'));
+        Array.from(gridEl.querySelectorAll('img')).forEach(img => {
+          img.style.transition = 'none';
+          img.style.opacity    = '0';
+          img.style.transform  = '';
+          img.style.zIndex     = '';
+        });
+      }
+
+      function runSection3() {
+        if (animated) return;
+        animated = true;
+
+        const imgs    = Array.from(gridEl.querySelectorAll('img'));
+        const offsets = [];
+
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          const gr = gridEl.getBoundingClientRect();
+          const cx = gr.left + gr.width  / 2;
+          const cy = gr.top  + gr.height / 2;
+
+          imgs.forEach((img, i) => {
+            const r  = img.getBoundingClientRect();
+            const dx = cx - (r.left + r.width  / 2);
+            const dy = cy - (r.top  + r.height / 2);
+            offsets.push({ dx, dy });
+            img.style.transition = 'none';
+            img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
+            img.style.opacity    = '0';
+            img.style.zIndex     = String(imgs.length - i);
+          });
+
+          // Text fades in — stagger each h2 and p
+          setTimeout(() => {
+            textEl.style.transition = 'none';
+            textEl.style.opacity    = '1';
+            const els = Array.from(textEl.querySelectorAll('h2, p'));
+            els.forEach((el, i) => {
+              setTimeout(() => el.classList.add('dissolved'), 150 + i * 350);
+            });
+          }, 400);
+
+          // Images appear stacked
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              const { dx, dy } = offsets[i];
+              img.style.transition = `opacity 0.3s ease ${i * 0.03}s`;
+              img.style.opacity    = '1';
+              img.style.transform  = `translate(${dx}px, ${dy}px) scale(0.5)`;
+            });
+          }, 600);
+
+          // Images spread
+          setTimeout(() => {
+            imgs.forEach((img, i) => {
+              img.style.transition = `transform 1.1s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.09}s`;
+              img.style.transform  = 'translate(0px, 0px) scale(1)';
+            });
+            setTimeout(() => imgs.forEach(img => { img.style.zIndex = ''; }), 1800);
+          }, 850);
+        }));
+      }
+
+      scroller.addEventListener('scroll', function () {
+        if (this.scrollLeft >= this.clientWidth * 1.5) runSection3();
+      }, { passive: true });
+
+      const obs = new MutationObserver(() => {
+        if (!page.classList.contains('visible')) resetSection3();
+      });
+      obs.observe(page, { attributes: true, attributeFilter: ['class'] });
+      resetSection3();
+    })();
+
+    // ── TNG section 4: Framing Questions animation ────────────────
+    (function () {
+      const scroller   = document.getElementById('tngHScroll');
+      const page       = document.getElementById('page-tng');
+      const titleEl    = document.getElementById('framingTitle');
+      const gridEl     = document.getElementById('framingGrid');
+      const summaryEl  = document.getElementById('framingSummary');
+      const oppTextEl  = document.getElementById('framingOppText');
+      let   animated   = false;
+
+      function resetFraming() {
+        animated = false;
+        titleEl.classList.remove('revealed');
+        summaryEl.classList.remove('revealed');
+        oppTextEl.classList.remove('dissolved');
+        Array.from(gridEl.children).forEach(el => el.classList.remove('revealed'));
+      }
+
+      function runFraming() {
+        if (animated) return;
+        animated = true;
+
+        // Title dissolves in
+        setTimeout(() => titleEl.classList.add('revealed'), 200);
+
+        // Column labels fade in
+        const labels = Array.from(gridEl.querySelectorAll('.framing-col-label'));
+        labels.forEach((el, i) => {
+          setTimeout(() => el.classList.add('revealed'), 500 + i * 60);
+        });
+
+        // Cards stagger in per row (3 cards per row, 5 rows)
+        const cards = Array.from(gridEl.querySelectorAll('.framing-card'));
+        cards.forEach((card, i) => {
+          const row = Math.floor(i / 3);
+          const col = i % 3;
+          setTimeout(() => card.classList.add('revealed'), 700 + row * 160 + col * 50);
+        });
+
+        // Opportunity Statement header fades in after all rows
+        const afterRows = 700 + 4 * 160 + 2 * 50 + 300;
+        setTimeout(() => summaryEl.classList.add('revealed'), afterRows);
+        // Paragraph dissolves in shortly after
+        setTimeout(() => oppTextEl.classList.add('dissolved'), afterRows + 300);
+      }
+
+      scroller.addEventListener('scroll', function () {
+        if (this.scrollLeft >= this.clientWidth * 2.5) runFraming();
+      }, { passive: true });
+
+      const obs = new MutationObserver(() => {
+        if (!page.classList.contains('visible')) resetFraming();
+      });
+      obs.observe(page, { attributes: true, attributeFilter: ['class'] });
+      resetFraming();
+    })();
+
+    // ── TNG section 5: gallery panels animation ───────────────────
+    (function () {
+      const scroller = document.getElementById('tngHScroll');
+      const page     = document.getElementById('page-tng');
+      const panels   = Array.from(document.querySelectorAll('#tngSection5 .tng-gallery-panel'));
+      let   animated = false;
+
+      function resetGallery() {
+        animated = false;
+        panels.forEach(p => p.classList.remove('revealed'));
+      }
+
+      function runGallery() {
+        if (animated) return;
+        animated = true;
+        panels.forEach(p => p.classList.add('revealed'));
+      }
+
+      scroller.addEventListener('scroll', function () {
+        if (this.scrollLeft >= this.clientWidth * 3.5) runGallery();
+      }, { passive: true });
+
+      const obs = new MutationObserver(() => {
+        if (!page.classList.contains('visible')) resetGallery();
+      });
+      obs.observe(page, { attributes: true, attributeFilter: ['class'] });
+      resetGallery();
+
+      // Home button
+      document.getElementById('tngHomeBtn').addEventListener('click', () => {
+        curtainClose(document.getElementById('page-tng'));
+      });
     })();
 
     // ── Crazy Lines canvas ────────────────────────────────────────
