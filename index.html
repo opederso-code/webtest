@@ -963,7 +963,8 @@
       border-radius: 4px;
       overflow: hidden;
     }
-    .gallery-card img {
+    .gallery-card img,
+    .gallery-card video {
       width: 100%; height: 100%;
       object-fit: cover; display: block;
       position: absolute; inset: 0;
@@ -971,8 +972,10 @@
       transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       visibility: hidden;
     }
-    .gallery-card img.active  { transform: translateX(0);     visibility: visible; }
-    .gallery-card img.leaving { transform: translateX(-100%); visibility: visible; }
+    .gallery-card img.active,
+    .gallery-card video.active  { transform: translateX(0);     visibility: visible; }
+    .gallery-card img.leaving,
+    .gallery-card video.leaving { transform: translateX(-100%); visibility: visible; }
 
     /* Text row: spans full card width, items spread with space-between */
     .meta-row {
@@ -1114,8 +1117,9 @@
 
       <div class="left-card">
         <div class="gallery-card" id="sphereCard">
-          <img src="sphere.webp" class="active" alt="Sphere render 1" loading="lazy" decoding="async" style="transition: opacity 0.3s ease;" />
-          <video id="torrentHoverVideo" muted playsinline loop style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 0.3s ease; pointer-events:none;"></video>
+          <img src="sphere.webp" class="active" alt="Sphere render 1" loading="lazy" decoding="async" />
+          <video src="media-10-1.mp4" muted playsinline loop class="torrent-gallery-vid"></video>
+          <video src="media-11-1.mp4" muted playsinline loop class="torrent-gallery-vid"></video>
         </div>
         <span class="hover-hint">Click to scroll or the underlined text to learn more</span>
         <div class="meta-row">
@@ -3130,33 +3134,25 @@
 
     document.getElementById('torrentNext').addEventListener('click', () => curtainOpen('page-torrent-2'));
 
-    // ── Torrent card hover video ───────────────────────────────────
+    // ── Torrent card carousel (img + videos) ──────────────────────
     (function () {
-      const card   = document.getElementById('sphereCard');
-      const img    = card.querySelector('img');
-      const video  = document.getElementById('torrentHoverVideo');
-      const clips  = ['media-10-1.mp4', 'media-11-1.mp4'];
-      let clipIdx  = 0;
+      const card  = document.getElementById('sphereCard');
+      const items = Array.from(card.querySelectorAll('img, video'));
+      let cur = 0;
 
-      video.src = clips[0];
-      video.addEventListener('ended', () => {
-        clipIdx = (clipIdx + 1) % clips.length;
-        video.src = clips[clipIdx];
-        video.play();
-      });
-
-      card.addEventListener('mouseenter', () => {
-        clipIdx = 0;
-        video.src = clips[0];
-        video.play();
-        img.style.opacity   = '0';
-        video.style.opacity = '1';
-      });
-
-      card.addEventListener('mouseleave', () => {
-        video.pause();
-        video.style.opacity = '0';
-        img.style.opacity   = '1';
+      card.addEventListener('click', () => {
+        const leaving = items[cur];
+        if (leaving.tagName === 'VIDEO') leaving.pause();
+        leaving.classList.add('leaving');
+        leaving.classList.remove('active');
+        leaving.addEventListener('transitionend', () => {
+          leaving.style.transition = 'none';
+          leaving.classList.remove('leaving');
+          requestAnimationFrame(() => requestAnimationFrame(() => { leaving.style.transition = ''; }));
+        }, { once: true });
+        cur = (cur + 1) % items.length;
+        items[cur].classList.add('active');
+        if (items[cur].tagName === 'VIDEO') items[cur].play();
       });
     })();
     document.getElementById('torrent2Next').addEventListener('click', () => curtainOpen('page-torrent-3'));
