@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Bungee+Hairline&family=Fahkwang&family=IBM+Plex+Sans+Devanagari:wght@700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; height: 100%; overflow: hidden; -webkit-font-smoothing: antialiased; }
+    html, body { width: 100%; height: 100%; overflow: hidden; -webkit-font-smoothing: antialiased; background: #fff; }
 
     .page { position: fixed; inset: 0; }
 
@@ -723,16 +723,16 @@
     }
 
     #contact {
-      z-index: 3; opacity: 0; pointer-events: none;
+      z-index: 3; opacity: 0; pointer-events: none; visibility: hidden;
       background: #fff;
-      transition: opacity 0.6s ease;
+      transition: opacity 0.6s ease, visibility 0s 0.6s;
       display: flex;
       flex-direction: column;
       gap: 36px;
       align-items: center;
       justify-content: center;
     }
-    #contact.visible { opacity: 1; pointer-events: all; }
+    #contact.visible { opacity: 1; pointer-events: all; visibility: visible; transition: opacity 0.6s ease, visibility 0s; }
 
     .contact-tagline {
       font-family: 'Satoshi', sans-serif;
@@ -803,7 +803,7 @@
     #philosophy {
       z-index: 3; opacity: 0; pointer-events: none;
       background: #fff;
-      transition: opacity 1.2s ease;
+      transition: opacity 0.6s ease;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -930,7 +930,7 @@
       opacity: 0; pointer-events: none; z-index: 10;
     }
     .left-card:hover .hover-hint {
-      animation: hoverHint 1.8s ease forwards;
+      animation: hoverHint 3s ease forwards;
     }
 
     .lines-card {
@@ -1101,7 +1101,7 @@
           <img src="oakley4.webp" alt="Oakley render 4" loading="lazy"  decoding="async" />
           <img src="oakley5.webp" alt="Oakley render 5" loading="lazy"  decoding="async" />
         </div>
-        <span class="hover-hint">Click to scroll through</span>
+        <span class="hover-hint">Click to scroll or the underlined text to learn more</span>
         <div class="meta-row">
           <p id="btn-oakley" role="button" tabindex="0" aria-label="View Oakley X Racing Concept project" style="text-decoration:underline;text-underline-offset:3px;">Oakley X Racing Concept</p>
           <p>Form Experimentation</p>
@@ -1114,7 +1114,7 @@
         <div class="gallery-card" id="sphereCard">
           <img src="sphere.webp" class="active" alt="Sphere render 1" loading="lazy"  decoding="async" />
         </div>
-        <span class="hover-hint">Click to scroll through</span>
+        <span class="hover-hint">Click to scroll or the underlined text to learn more</span>
         <div class="meta-row">
           <p id="btn-torrent" role="button" tabindex="0" aria-label="View Torrent project" style="text-decoration:underline;text-underline-offset:3px;">Torrent</p>
           <p>Defense Tech Concept</p>
@@ -1130,7 +1130,7 @@
           <img src="tng3.webp" alt="TNG render 3" loading="lazy"  decoding="async" />
           <img src="tng4.webp" alt="TNG render 4" loading="lazy"  decoding="async" />
         </div>
-        <span class="hover-hint">Click to scroll through</span>
+        <span class="hover-hint">Click to scroll or the underlined text to learn more</span>
         <div class="meta-row">
           <p id="btn-tng" role="button" tabindex="0" aria-label="View Teenage Engineering Concept project" style="text-decoration:underline;text-underline-offset:3px;">Teenage Engineering Concept</p>
           <p>Desing Language Replication</p>
@@ -1148,7 +1148,7 @@
           <img src="ferro5.webp" alt="Ferro render 5" style="object-position: center top;" loading="lazy"  decoding="async" />
           <img src="ferro6.webp" alt="Ferro render 6" style="object-position: center top;" loading="lazy"  decoding="async" />
         </div>
-        <span class="hover-hint">Click to scroll through</span>
+        <span class="hover-hint">Click to scroll or the underlined text to learn more</span>
         <div class="meta-row">
           <p id="btn-ferro" role="button" tabindex="0" aria-label="View Ferros Potion Concept project" style="text-decoration:underline;text-underline-offset:3px;">Ferros Potion Concept</p>
           <p>Brutalist Design</p>
@@ -1216,7 +1216,7 @@
           </div>
           <div class="cad-grid" id="cadGrid">
             <div class="cad-wrap"><img src="cad1.webp" alt="CAD render 1" loading="lazy"  decoding="async" /></div>
-            <div class="cad-wrap"><img src="cad2.webp" alt="CAD render 2" loading="lazy"  decoding="async" /></div>
+            <div class="cad-wrap"><img src="cad-fusion.png" alt="CAD render 2" loading="lazy"  decoding="async" /></div>
             <div class="cad-wrap"><img src="cad3.webp" alt="CAD render 3" loading="lazy"  decoding="async" /></div>
             <div class="cad-wrap"><img src="cad4.webp" alt="CAD render 4" loading="lazy"  decoding="async" /></div>
           </div>
@@ -1780,12 +1780,17 @@
     });
 
     const tagline = document.querySelector('.contact-tagline');
+    let dissolveTimer = null;
 
     function dissolveIn() {
-      setTimeout(() => tagline.classList.add('revealed'), 900);
+      dissolveTimer = setTimeout(() => tagline.classList.add('revealed'), 900);
     }
     function dissolveOut() {
+      clearTimeout(dissolveTimer);
+      dissolveTimer = null;
       tagline.classList.remove('revealed');
+      document.getElementById('emailWrapper').classList.remove('revealed');
+      document.querySelectorAll('.contact-icon').forEach(ic => ic.classList.remove('clicked'));
     }
 
     document.querySelector('.nav-right').addEventListener('click', () => {
@@ -1838,8 +1843,8 @@
       }
     }
 
-    smoothScroll(document.querySelector('.col-left'), 0.32);
-    smoothScroll(document.querySelector('.col-right'), 0.32);
+    smoothScroll(document.querySelector('.col-left'), 0.22);
+    smoothScroll(document.querySelector('.col-right'), 0.22);
 
     // ── Oakley page entrance animation ───────────────────────────
     (function () {
