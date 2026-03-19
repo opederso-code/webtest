@@ -1294,17 +1294,9 @@
   <div class="page project-page" id="page-torrent-4">
     <img src="torrent-exploded.jpg" alt="Torrent exploded view" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; display:block;" />
     <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back" style="position:absolute; z-index:10;">← Back</span>
-    <span class="next-btn" id="torrent4Next" role="button" tabindex="0" aria-label="Next page" style="position:absolute; z-index:10;">Next →</span>
     <div style="position:absolute; top:60px; left:80px; z-index:10; max-width:300px;">
       <h2 style="font-family:'Satoshi',sans-serif; font-weight:700; font-size:32px; color:#000; line-height:1.15; margin:0 0 20px 0;">Current Status</h2>
       <p style="font-family:'Satoshi',sans-serif; font-weight:300; font-style:italic; font-size:16px; color:#000; line-height:1.65; margin:0;">While building of the project has slowed down, I have reconsidered the form factor of the product and the most optimal way to solve the problem at hand when thinking through a <a href="https://www.youtube.com/watch?v=NV3sBlRgzTI" target="_blank" rel="noopener" class="fade-link" style="text-decoration:underline; text-underline-offset:3px; color:inherit;">first principals</a> lens. This decision was influenced upon further interviews with those that have combat & especially CQB experience. As of now I am learning how to utilize a raspberry Pi-5 as our compute and solder together electrical components to bring our prototype to life.</p>
-    </div>
-  </div>
-
-  <div class="page project-page" id="page-torrent-5">
-    <div style="position:absolute; top:60px; left:80px; max-width:340px;">
-      <h2 style="font-family:'Satoshi',sans-serif; font-weight:700; font-size:32px; color:#000; line-height:1.15; margin-bottom:20px;">Current Status</h2>
-      <p style="font-family:'Satoshi',sans-serif; font-weight:300; font-style:italic; font-size:16px; color:#000; line-height:1.65;">While building of the project has slowed down, I have reconsidered the form factor of the product and the most optimal way to solve the problem at hand when thinking through a first principals lens. This decision was influenced upon further interviews with those that have combat & especially CQB experience. As of now I am learning how to utilize a raspberry Pi-5 as our compute and solder together electrical components to bring our prototype to life.</p>
     </div>
   </div>
 
@@ -3051,7 +3043,6 @@
     document.getElementById('torrentNext').addEventListener('click', () => curtainOpen('page-torrent-2'));
     document.getElementById('torrent2Next').addEventListener('click', () => curtainOpen('page-torrent-3'));
     document.getElementById('torrent3Next').addEventListener('click', () => curtainOpen('page-torrent-4'));
-    document.getElementById('torrent4Next').addEventListener('click', () => curtainOpen('page-torrent-5'));
 
     // ── Torrent page 3 animation + video ──────────────────────────
     (function () {
