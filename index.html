@@ -1296,7 +1296,7 @@
 
   <div class="page project-page" id="page-torrent-4">
     <img src="torrent-exploded.jpg" alt="Torrent exploded view" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; display:block;" />
-    <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back" style="position:absolute; z-index:10;">← Back</span>
+    <span class="back-btn" id="torrent4Home" role="button" tabindex="0" aria-label="Go home" style="position:absolute; z-index:10;">Home</span>
     <div style="position:absolute; top:60px; left:80px; z-index:10; max-width:300px;">
       <h2 style="font-family:'Satoshi',sans-serif; font-weight:700; font-size:32px; color:#000; line-height:1.15; margin:0 0 20px 0;">Current Status</h2>
       <p style="font-family:'Satoshi',sans-serif; font-weight:300; font-style:italic; font-size:16px; color:#000; line-height:1.65; margin:0;">While building of the project has slowed down, I have reconsidered the form factor of the product and the most optimal way to solve the problem at hand when thinking through a <a href="https://www.youtube.com/watch?v=NV3sBlRgzTI" target="_blank" rel="noopener" class="fade-link" style="text-decoration:underline; text-underline-offset:3px; color:inherit;">first principals</a> lens. This decision was influenced upon further interviews with those that have combat & especially CQB experience. As of now I am learning how to utilize a raspberry Pi-5 as our compute and solder together electrical components to bring our prototype to life.</p>
@@ -2201,21 +2201,50 @@
       scroller.scrollTo({ left: (cur + dir) * scroller.clientWidth, behavior: 'smooth' });
     });
 
-    // ── Torrent arrow key navigation ──────────────────────────────
+    // ── Torrent arrow key + scroll + home navigation ──────────────
     (function () {
       const torrentSeq = ['page-torrent','page-torrent-2','page-torrent-3','page-torrent-4'];
-      document.addEventListener('keydown', (e) => {
-        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-        const pages  = document.querySelectorAll('.project-page.visible');
+
+      function currentTorrentIdx() {
+        const pages = document.querySelectorAll('.project-page.visible');
         const current = pages[pages.length - 1];
-        if (!current) return;
-        const idx = torrentSeq.indexOf(current.id);
+        if (!current) return -1;
+        return torrentSeq.indexOf(current.id);
+      }
+
+      function navigateTorrent(dir) {
+        const idx = currentTorrentIdx();
         if (idx === -1) return;
-        if (e.key === 'ArrowRight' && idx < torrentSeq.length - 1) {
+        if (dir === 1 && idx < torrentSeq.length - 1) {
           curtainOpen(torrentSeq[idx + 1]);
-        } else if (e.key === 'ArrowLeft' && idx > 0) {
-          curtainClose(current);
+        } else if (dir === -1 && idx > 0) {
+          const pages = document.querySelectorAll('.project-page.visible');
+          curtainClose(pages[pages.length - 1]);
         }
+      }
+
+      // Arrow keys
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') navigateTorrent(1);
+        else if (e.key === 'ArrowLeft') navigateTorrent(-1);
+      });
+
+      // Two-finger horizontal scroll
+      let scrollLocked = false;
+      document.addEventListener('wheel', (e) => {
+        if (currentTorrentIdx() === -1) return;
+        if (scrollLocked) return;
+        if (Math.abs(e.deltaX) < Math.abs(e.deltaY) || Math.abs(e.deltaX) < 20) return;
+        scrollLocked = true;
+        setTimeout(() => { scrollLocked = false; }, 800);
+        navigateTorrent(e.deltaX > 0 ? 1 : -1);
+      }, { passive: true });
+
+      // Home button — close all torrent pages
+      document.getElementById('torrent4Home').addEventListener('click', () => {
+        document.querySelectorAll('.project-page.visible').forEach(p => {
+          p.classList.remove('visible');
+        });
       });
     })();
 
