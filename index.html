@@ -2240,11 +2240,19 @@
         navigateTorrent(e.deltaX > 0 ? 1 : -1);
       }, { passive: true });
 
-      // Home button — close all torrent pages
+      // Home button — curtain transition back to main portfolio
       document.getElementById('torrent4Home').addEventListener('click', () => {
-        document.querySelectorAll('.project-page.visible').forEach(p => {
-          p.classList.remove('visible');
-        });
+        curtain.style.transition = 'transform 0.65s cubic-bezier(0.76, 0, 0.24, 1)';
+        curtain.style.transform  = 'translateY(0%)';
+        curtain.addEventListener('transitionend', () => {
+          document.querySelectorAll('.project-page.visible').forEach(p => p.classList.remove('visible'));
+          curtain.style.transition = 'transform 0.65s cubic-bezier(0.76, 0, 0.24, 1)';
+          curtain.style.transform  = 'translateY(100%)';
+          curtain.addEventListener('transitionend', () => {
+            curtain.style.transition = 'none';
+            curtain.style.transform  = 'translateY(100%)';
+          }, { once: true });
+        }, { once: true });
       });
     })();
 
