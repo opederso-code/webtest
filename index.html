@@ -1114,7 +1114,8 @@
 
       <div class="left-card">
         <div class="gallery-card" id="sphereCard">
-          <img src="sphere.webp" class="active" alt="Sphere render 1" loading="lazy"  decoding="async" />
+          <img src="sphere.webp" class="active" alt="Sphere render 1" loading="lazy" decoding="async" style="transition: opacity 0.3s ease;" />
+          <video id="torrentHoverVideo" muted playsinline loop style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 0.3s ease; pointer-events:none;"></video>
         </div>
         <span class="hover-hint">Click to scroll or the underlined text to learn more</span>
         <div class="meta-row">
@@ -3128,6 +3129,36 @@
     })();
 
     document.getElementById('torrentNext').addEventListener('click', () => curtainOpen('page-torrent-2'));
+
+    // ── Torrent card hover video ───────────────────────────────────
+    (function () {
+      const card   = document.getElementById('sphereCard');
+      const img    = card.querySelector('img');
+      const video  = document.getElementById('torrentHoverVideo');
+      const clips  = ['media-10-1.mp4', 'media-11-1.mp4'];
+      let clipIdx  = 0;
+
+      video.src = clips[0];
+      video.addEventListener('ended', () => {
+        clipIdx = (clipIdx + 1) % clips.length;
+        video.src = clips[clipIdx];
+        video.play();
+      });
+
+      card.addEventListener('mouseenter', () => {
+        clipIdx = 0;
+        video.src = clips[0];
+        video.play();
+        img.style.opacity   = '0';
+        video.style.opacity = '1';
+      });
+
+      card.addEventListener('mouseleave', () => {
+        video.pause();
+        video.style.opacity = '0';
+        img.style.opacity   = '1';
+      });
+    })();
     document.getElementById('torrent2Next').addEventListener('click', () => curtainOpen('page-torrent-3'));
     document.getElementById('torrent3Next').addEventListener('click', () => curtainOpen('page-torrent-4'));
 
