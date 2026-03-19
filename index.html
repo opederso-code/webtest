@@ -1605,7 +1605,7 @@
 
       <!-- Section 8: Single render -->
       <div class="oakley-section ferro-render-section">
-        <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back" style="color:#fff;">← Back</span>
+        <span class="back-btn" id="ferroHomeBtn" role="button" tabindex="0" aria-label="Go home" style="color:#fff;">Home</span>
         <div class="ferro-single" id="ferroRender8">
           <img src="ferro-render3.jpg" alt="Render scene" decoding="async" />
         </div>
@@ -1792,11 +1792,22 @@
     document.getElementById('btn-tng').addEventListener('click', () => curtainOpen('page-tng'));
     document.getElementById('btn-ferro').addEventListener('click', () => curtainOpen('page-ferro'));
 
-    document.getElementById('cadHomeBtn').addEventListener('click', () => {
-      const pages = document.querySelectorAll('.project-page.visible');
-      const page = pages[pages.length - 1];
-      if (page) curtainClose(page);
-    });
+    function curtainHome() {
+      curtain.style.transition = 'transform 0.65s cubic-bezier(0.76, 0, 0.24, 1)';
+      curtain.style.transform  = 'translateY(0%)';
+      curtain.addEventListener('transitionend', () => {
+        document.querySelectorAll('.project-page.visible').forEach(p => p.classList.remove('visible'));
+        curtain.style.transition = 'transform 0.65s cubic-bezier(0.76, 0, 0.24, 1)';
+        curtain.style.transform  = 'translateY(100%)';
+        curtain.addEventListener('transitionend', () => {
+          curtain.style.transition = 'none';
+          curtain.style.transform  = 'translateY(100%)';
+        }, { once: true });
+      }, { once: true });
+    }
+
+    document.getElementById('cadHomeBtn').addEventListener('click', curtainHome);
+    document.getElementById('ferroHomeBtn').addEventListener('click', curtainHome);
 
     document.querySelectorAll('.project-back').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -2241,19 +2252,7 @@
       }, { passive: true });
 
       // Home button — curtain transition back to main portfolio
-      document.getElementById('torrent4Home').addEventListener('click', () => {
-        curtain.style.transition = 'transform 0.65s cubic-bezier(0.76, 0, 0.24, 1)';
-        curtain.style.transform  = 'translateY(0%)';
-        curtain.addEventListener('transitionend', () => {
-          document.querySelectorAll('.project-page.visible').forEach(p => p.classList.remove('visible'));
-          curtain.style.transition = 'transform 0.65s cubic-bezier(0.76, 0, 0.24, 1)';
-          curtain.style.transform  = 'translateY(100%)';
-          curtain.addEventListener('transitionend', () => {
-            curtain.style.transition = 'none';
-            curtain.style.transform  = 'translateY(100%)';
-          }, { once: true });
-        }, { once: true });
-      });
+      document.getElementById('torrent4Home').addEventListener('click', curtainHome);
     })();
 
     // ── Ferro sketch grid animation (section 3) ─────────────────
@@ -3003,9 +3002,7 @@
       resetGallery();
 
       // Home button
-      document.getElementById('tngHomeBtn').addEventListener('click', () => {
-        curtainClose(document.getElementById('page-tng'));
-      });
+      document.getElementById('tngHomeBtn').addEventListener('click', curtainHome);
     })();
 
     // ── Crazy Lines canvas ────────────────────────────────────────
