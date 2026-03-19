@@ -1264,15 +1264,43 @@
 
   <div class="page project-page" id="page-torrent-2">
     <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
-    <div id="torrent2TextEl" style="position:absolute; top:60px; left:48px; max-width:320px;">
+    <span class="next-btn" id="torrent2Next" role="button" tabindex="0" aria-label="Next page">Next →</span>
+    <div id="torrent2TextEl" style="position:absolute; top:60px; left:80px; max-width:320px;">
       <h2 style="font-family:'Satoshi',sans-serif; font-weight:700; font-size:32px; color:#000; line-height:1.15; margin-bottom:20px; opacity:0; filter:blur(10px); transition:opacity 2.4s ease, filter 2.4s ease;">Problem Discovery</h2>
-      <p style="font-family:'Satoshi',sans-serif; font-weight:300; font-style:italic; font-size:clamp(12px,1vw,14px); color:#000; line-height:1.65; margin-bottom:16px; opacity:0; filter:blur(10px); transition:opacity 2.4s ease, filter 2.4s ease;">After conducting problem discovery and speaking with 20+ individuals across the defense space, ranging from veterans with deployment experience to those building tools for warfighters at companies like Palantir and Anduril, we realized intel was essential to those facing life threatning situations on the battle field.</p>
-      <p style="font-family:'Satoshi',sans-serif; font-weight:300; font-style:italic; font-size:clamp(12px,1vw,14px); color:#000; line-height:1.65; opacity:0; filter:blur(10px); transition:opacity 2.4s ease, filter 2.4s ease;">Per our interviews with soldiers we came to unanimous conclusions that the most important things on the battle field in high danger scenarios are Speed, Stealth, and Intelligence. Understanding this was especially an issue in close quarters combat, we sought to make a product taking advantage of advances in computer vision and AR related technology that would enable real time heightened awareness for warfighters.</p>
+      <p style="font-family:'Satoshi',sans-serif; font-weight:300; font-style:italic; font-size:16px; color:#000; line-height:1.65; margin-bottom:16px; opacity:0; filter:blur(10px); transition:opacity 2.4s ease, filter 2.4s ease;">After conducting problem discovery and speaking with 20+ individuals across the defense space, ranging from veterans with deployment experience to those building tools for warfighters at companies like Palantir and Anduril, we realized intel was essential to those facing life threatning situations on the battle field.</p>
+      <p style="font-family:'Satoshi',sans-serif; font-weight:300; font-style:italic; font-size:16px; color:#000; line-height:1.65; opacity:0; filter:blur(10px); transition:opacity 2.4s ease, filter 2.4s ease;">Per our interviews with soldiers we came to unanimous conclusions that the most important things on the battle field in high danger scenarios are Speed, Stealth, and Intelligence. Understanding this was especially an issue in close quarters combat, we sought to make a product taking advantage of advances in computer vision and AR related technology that would enable real time heightened awareness for warfighters.</p>
     </div>
-    <div id="torrent2Words" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; line-height:1.05;">
+    <div id="torrent2Words" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:left; line-height:1.05;">
       <div style="font-family:'Satoshi',sans-serif; font-weight:700; font-size:clamp(52px,7vw,96px); color:#000; opacity:0; filter:blur(14px); transform:translateY(18px); transition:opacity 1.4s ease, filter 1.4s ease, transform 1.4s cubic-bezier(0.16,1,0.3,1);">Speed</div>
       <div style="font-family:'Satoshi',sans-serif; font-weight:700; font-size:clamp(52px,7vw,96px); color:#000; opacity:0; filter:blur(14px); transform:translateY(18px); transition:opacity 1.4s ease, filter 1.4s ease, transform 1.4s cubic-bezier(0.16,1,0.3,1);">Stealth</div>
       <div style="font-family:'Satoshi',sans-serif; font-weight:700; font-size:clamp(52px,7vw,96px); color:#000; opacity:0; filter:blur(14px); transform:translateY(18px); transition:opacity 1.4s ease, filter 1.4s ease, transform 1.4s cubic-bezier(0.16,1,0.3,1);">Intel</div>
+    </div>
+  </div>
+
+  <div class="page project-page" id="page-torrent-3">
+    <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
+    <span class="next-btn" id="torrent3Next" role="button" tabindex="0" aria-label="Next page">Next →</span>
+    <div style="position:absolute; top:0; left:0; right:0; bottom:0; display:flex; align-items:center; justify-content:center;">
+      <div style="display:flex; align-items:flex-start; gap:40px;">
+        <div id="torrent3TextEl" style="width:160px; flex-shrink:0;">
+          <h2 style="font-family:'Satoshi',sans-serif; font-weight:700; font-size:32px; color:#000; line-height:1.15; margin-bottom:20px; opacity:0; filter:blur(10px); transition:opacity 2.4s ease, filter 2.4s ease;">Our Solution</h2>
+          <p style="font-family:'Satoshi',sans-serif; font-weight:300; font-style:italic; font-size:16px; color:#000; line-height:1.65; opacity:0; filter:blur(10px); transition:opacity 2.4s ease, filter 2.4s ease;">Torrent serves as a semi autonomous land drone that houses a camera on a gimbal and compute working with our Yolo trained computer vision model which would be able to box out combatants and other enemy paraphernalia and then translate that to existing AR technologies worn by soldiers.</p>
+        </div>
+        <video id="torrent3Video" autoplay muted playsinline style="width:62vw; max-height:82vh; border-radius:6px; object-fit:cover; background:#000; display:block;"></video>
+      </div>
+    </div>
+  </div>
+
+  <div class="page project-page" id="page-torrent-4">
+    <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back" style="position:relative; z-index:10;">← Back</span>
+    <span class="next-btn" id="torrent4Next" role="button" tabindex="0" aria-label="Next page" style="position:relative; z-index:10;">Next →</span>
+    <img src="torrent-exploded.jpg" alt="Torrent exploded view" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; display:block; z-index:1;" />
+  </div>
+
+  <div class="page project-page" id="page-torrent-5">
+    <div style="position:absolute; top:60px; left:80px; max-width:340px;">
+      <h2 style="font-family:'Satoshi',sans-serif; font-weight:700; font-size:32px; color:#000; line-height:1.15; margin-bottom:20px;">Current Status</h2>
+      <p style="font-family:'Satoshi',sans-serif; font-weight:300; font-style:italic; font-size:16px; color:#000; line-height:1.65;">While building of the project has slowed down, I have reconsidered the form factor of the product and the most optimal way to solve the problem at hand when thinking through a first principals lens. This decision was influenced upon further interviews with those that have combat & especially CQB experience. As of now I am learning how to utilize a raspberry Pi-5 as our compute and solder together electrical components to bring our prototype to life.</p>
     </div>
   </div>
 
@@ -1766,13 +1794,15 @@
     document.getElementById('btn-ferro').addEventListener('click', () => curtainOpen('page-ferro'));
 
     document.getElementById('cadHomeBtn').addEventListener('click', () => {
-      const page = document.querySelector('.project-page.visible');
+      const pages = document.querySelectorAll('.project-page.visible');
+      const page = pages[pages.length - 1];
       if (page) curtainClose(page);
     });
 
     document.querySelectorAll('.project-back').forEach(btn => {
       btn.addEventListener('click', () => {
-        const page = document.querySelector('.project-page.visible');
+        const pages = document.querySelectorAll('.project-page.visible');
+        const page = pages[pages.length - 1];
         if (page) curtainClose(page);
       });
     });
@@ -3015,6 +3045,45 @@
     })();
 
     document.getElementById('torrentNext').addEventListener('click', () => curtainOpen('page-torrent-2'));
+    document.getElementById('torrent2Next').addEventListener('click', () => curtainOpen('page-torrent-3'));
+    document.getElementById('torrent3Next').addEventListener('click', () => curtainOpen('page-torrent-4'));
+    document.getElementById('torrent4Next').addEventListener('click', () => curtainOpen('page-torrent-5'));
+
+    // ── Torrent page 3 animation + video ──────────────────────────
+    (function () {
+      const page    = document.getElementById('page-torrent-3');
+      const textEl  = document.getElementById('torrent3TextEl');
+      const video   = document.getElementById('torrent3Video');
+      const clips   = ['media-10-1-cropped.mp4', 'media-11-1-cropped.mp4'];
+      let clipIndex = 0;
+      let ran       = false;
+
+      video.src = clips[0];
+      video.load();
+      video.addEventListener('ended', () => {
+        clipIndex = (clipIndex + 1) % clips.length;
+        video.src = clips[clipIndex];
+        video.play();
+      });
+
+      function reset() {
+        ran = false;
+        Array.from(textEl.querySelectorAll('h2, p')).forEach(el => {
+          el.style.opacity = '0'; el.style.filter = 'blur(10px)';
+        });
+      }
+      function run() {
+        if (ran) return; ran = true;
+        video.play();
+        setTimeout(() => {
+          Array.from(textEl.querySelectorAll('h2, p')).forEach((el, i) => {
+            setTimeout(() => { el.style.opacity = '1'; el.style.filter = 'blur(0)'; }, i * 350);
+          });
+        }, 300);
+      }
+      const obs = new MutationObserver(() => { if (page.classList.contains('visible')) run(); else reset(); });
+      obs.observe(page, { attributes: true, attributeFilter: ['class'] });
+    })();
 
     // ── Torrent page 2 text animation ─────────────────────────────
     (function () {
