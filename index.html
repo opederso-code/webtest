@@ -1250,6 +1250,14 @@
     </div>
   </div>
 
+  <!-- Torrent section page dots -->
+  <div id="torrentDots" style="position:fixed; bottom:18px; right:20px; display:none; gap:6px; align-items:center; z-index:100;">
+    <div class="oakley-dot active" data-torrent-index="0"></div>
+    <div class="oakley-dot" data-torrent-index="1"></div>
+    <div class="oakley-dot" data-torrent-index="2"></div>
+    <div class="oakley-dot" data-torrent-index="3"></div>
+  </div>
+
   <div class="page project-page" id="page-torrent">
     <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
     <span class="next-btn" id="torrentNext" role="button" tabindex="0" aria-label="Next page">Next →</span>
@@ -2211,6 +2219,30 @@
       const cur = Math.round(scroller.scrollLeft / scroller.clientWidth);
       scroller.scrollTo({ left: (cur + dir) * scroller.clientWidth, behavior: 'smooth' });
     });
+
+    // ── Torrent section dots ───────────────────────────────────────
+    (function () {
+      const torrentSeq = ['page-torrent','page-torrent-2','page-torrent-3','page-torrent-4'];
+      const dotsEl     = document.getElementById('torrentDots');
+      const dots       = Array.from(dotsEl.querySelectorAll('.oakley-dot'));
+
+      function update() {
+        const pages  = document.querySelectorAll('.project-page.visible');
+        const current = pages[pages.length - 1];
+        const idx    = current ? torrentSeq.indexOf(current.id) : -1;
+        if (idx === -1) {
+          dotsEl.style.display = 'none';
+        } else {
+          dotsEl.style.display = 'flex';
+          dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        }
+      }
+
+      torrentSeq.forEach(id => {
+        const page = document.getElementById(id);
+        new MutationObserver(update).observe(page, { attributes: true, attributeFilter: ['class'] });
+      });
+    })();
 
     // ── Torrent arrow key + scroll + home navigation ──────────────
     (function () {
