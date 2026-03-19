@@ -1253,6 +1253,7 @@
   <div class="page project-page" id="page-torrent">
     <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
     <span class="next-btn" id="torrentNext" role="button" tabindex="0" aria-label="Next page">Next →</span>
+    <div class="scroll-hint" id="torrentScrollHint">Two finger scroll right<div class="scroll-hint-arrow"><span></span><span></span><span></span></div></div>
     <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); display:flex; align-items:flex-start; gap:40px;">
       <div style="width:200px; flex-shrink:0;" id="torrentTextEl">
         <h2 style="font-family:'Satoshi',sans-serif; font-weight:700; font-size:32px; color:#000; line-height:1.15; margin-bottom:20px; opacity:0; filter:blur(10px); transition:opacity 2.4s ease, filter 2.4s ease;">Synopsis</h2>
@@ -1265,6 +1266,7 @@
   <div class="page project-page" id="page-torrent-2">
     <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
     <span class="next-btn" id="torrent2Next" role="button" tabindex="0" aria-label="Next page">Next →</span>
+    <div class="scroll-hint" id="torrent2ScrollHint">Two finger scroll right<div class="scroll-hint-arrow"><span></span><span></span><span></span></div></div>
     <div id="torrent2TextEl" style="position:absolute; top:60px; left:80px; max-width:320px;">
       <h2 style="font-family:'Satoshi',sans-serif; font-weight:700; font-size:32px; color:#000; line-height:1.15; margin-bottom:20px; opacity:0; filter:blur(10px); transition:opacity 2.4s ease, filter 2.4s ease;">Problem Discovery</h2>
       <p style="font-family:'Satoshi',sans-serif; font-weight:300; font-style:italic; font-size:16px; color:#000; line-height:1.65; margin-bottom:16px; opacity:0; filter:blur(10px); transition:opacity 2.4s ease, filter 2.4s ease;">After conducting problem discovery and speaking with 20+ individuals across the defense space, ranging from veterans with deployment experience to those building tools for warfighters at companies like Palantir and Anduril, we realized intel was essential to those facing life threatning situations on the battle field.</p>
@@ -1280,6 +1282,7 @@
   <div class="page project-page" id="page-torrent-3">
     <span class="back-btn project-back" role="button" tabindex="0" aria-label="Go back">← Back</span>
     <span class="next-btn" id="torrent3Next" role="button" tabindex="0" aria-label="Next page">Next →</span>
+    <div class="scroll-hint" id="torrent3ScrollHint">Two finger scroll right<div class="scroll-hint-arrow"><span></span><span></span><span></span></div></div>
     <div style="position:absolute; top:0; left:0; right:0; bottom:0; display:flex; align-items:center; justify-content:center;">
       <div style="display:flex; align-items:flex-start; gap:40px;">
         <div id="torrent3TextEl" style="width:160px; flex-shrink:0;">
@@ -2197,6 +2200,24 @@
       const cur = Math.round(scroller.scrollLeft / scroller.clientWidth);
       scroller.scrollTo({ left: (cur + dir) * scroller.clientWidth, behavior: 'smooth' });
     });
+
+    // ── Torrent arrow key navigation ──────────────────────────────
+    (function () {
+      const torrentSeq = ['page-torrent','page-torrent-2','page-torrent-3','page-torrent-4'];
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        const pages  = document.querySelectorAll('.project-page.visible');
+        const current = pages[pages.length - 1];
+        if (!current) return;
+        const idx = torrentSeq.indexOf(current.id);
+        if (idx === -1) return;
+        if (e.key === 'ArrowRight' && idx < torrentSeq.length - 1) {
+          curtainOpen(torrentSeq[idx + 1]);
+        } else if (e.key === 'ArrowLeft' && idx > 0) {
+          curtainClose(current);
+        }
+      });
+    })();
 
     // ── Ferro sketch grid animation (section 3) ─────────────────
     (function () {
